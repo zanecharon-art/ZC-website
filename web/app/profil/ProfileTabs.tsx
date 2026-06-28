@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
+import { startCheckout } from "@/lib/checkout";
 
 const TABS = [
   { id: "bibliothek", label: "📚 Bibliothek" },
@@ -18,12 +19,24 @@ type TabId = (typeof TABS)[number]["id"];
 
 export default function ProfileTabs({ user }: { user: User }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
   const [activeTab, setActiveTab] = useState<TabId>("bibliothek");
   const [username, setUsername] = useState(user.user_metadata?.username ?? "");
   const [status, setStatus] = useState(user.user_metadata?.status ?? "");
   const [email, setEmail] = useState(user.email ?? "");
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    const checkout = searchParams.get("checkout");
+    if (checkout === "success") {
+      showToast("Kauf erfolgreich! Viel Freude beim Lesen.");
+      router.replace("/profil");
+    } else if (checkout === "cancelled") {
+      showToast("Checkout abgebrochen.");
+      router.replace("/profil");
+    }
+  }, [searchParams, router]);
 
   async function handleSave() {
     setSaving(true);
@@ -121,7 +134,7 @@ export default function ProfileTabs({ user }: { user: User }) {
             <button
               className="btn"
               style={{ width: "100%", marginTop: 16 }}
-              onClick={() => showToast("Weiter zum Checkout…")}
+              onClick={() => startCheckout("chapter:geteilter-himmel:4")}
             >
               Zur Kasse
             </button>

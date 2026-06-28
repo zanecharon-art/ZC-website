@@ -1,9 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
+import { startCheckout } from "@/lib/checkout";
 
 export default function Poems() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+  }, []);
+
   return (
     <div className="page">
       <div className="section">
@@ -233,10 +244,21 @@ export default function Poems() {
               <Link href="/registrieren" className="ppp-add" style={{ display: "block" }}>
                 + Poem hinzufügen
               </Link>
-              <Link href="/registrieren" className="ppp-download" style={{ textDecoration: "none" }}>
-                <span>⬇ Download-Paket</span>
-                <span style={{ color: "var(--gold)", fontWeight: 600 }}>2,99 €</span>
-              </Link>
+              {user ? (
+                <button
+                  className="ppp-download"
+                  style={{ border: "none" }}
+                  onClick={() => startCheckout("poems:download-paket")}
+                >
+                  <span>⬇ Download-Paket</span>
+                  <span style={{ color: "var(--gold)", fontWeight: 600 }}>2,99 €</span>
+                </button>
+              ) : (
+                <Link href="/registrieren" className="ppp-download" style={{ textDecoration: "none" }}>
+                  <span>⬇ Download-Paket</span>
+                  <span style={{ color: "var(--gold)", fontWeight: 600 }}>2,99 €</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>

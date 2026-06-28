@@ -1,6 +1,7 @@
 "use client";
 
 import { showToast } from "@/lib/toast";
+import { startCheckout } from "@/lib/checkout";
 
 export default function GeteilterHimmel() {
   return (
@@ -92,28 +93,28 @@ export default function GeteilterHimmel() {
             </div>
             <span className="ch-free">Gratis lesen</span>
           </li>
-          <li className="chapter-item" onClick={() => showToast("Anmelden, um Kapitel 4 zu kaufen")}>
+          <li className="chapter-item" onClick={() => startCheckout("chapter:geteilter-himmel:4")}>
             <div className="ch-left">
               <span className="ch-icon" style={{ color: "var(--gold)" }}>🔒</span>
               4. Geteilter Himmel
             </div>
             <span className="ch-price">1,49 €</span>
           </li>
-          <li className="chapter-item" onClick={() => showToast("Anmelden, um Kapitel 5 zu kaufen")}>
+          <li className="chapter-item" onClick={() => startCheckout("chapter:geteilter-himmel:5")}>
             <div className="ch-left">
               <span className="ch-icon" style={{ color: "var(--gold)" }}>🔒</span>
               5. Schattenwurf
             </div>
             <span className="ch-price">1,49 €</span>
           </li>
-          <li className="chapter-item" onClick={() => showToast("Anmelden, um Kapitel 6 zu kaufen")}>
+          <li className="chapter-item" onClick={() => startCheckout("chapter:geteilter-himmel:6")}>
             <div className="ch-left">
               <span className="ch-icon" style={{ color: "var(--gold)" }}>🔒</span>
               6. Die Stimme im Papier
             </div>
             <span className="ch-price">1,49 €</span>
           </li>
-          <li className="chapter-item" onClick={() => showToast("Anmelden, um Kapitel 7 zu kaufen")}>
+          <li className="chapter-item" onClick={() => startCheckout("chapter:geteilter-himmel:7")}>
             <div className="ch-left">
               <span className="ch-icon" style={{ color: "var(--gold)" }}>🔒</span>
               7. Zwischen den Zeilen
@@ -128,7 +129,7 @@ export default function GeteilterHimmel() {
         <button
           className="btn"
           style={{ width: "100%", marginTop: 16, padding: 14 }}
-          onClick={() => showToast("Zum Checkout → Alle 14 Kapitel für 14,99 €")}
+          onClick={() => startCheckout("bundle:geteilter-himmel")}
         >
           Alle Kapitel freischalten · 14,99 €
         </button>

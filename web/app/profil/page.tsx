@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ProfileTabs from "./ProfileTabs";
@@ -27,7 +28,9 @@ export default async function Profil() {
           </div>
         </div>
 
-        <ProfileTabs user={user} />
+        <Suspense>
+          <ProfileTabs user={user} />
+        </Suspense>
       </div>
     </div>
   );
