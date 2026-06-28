@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 
 const NAV_LINKS = [
   { href: "/", label: "Start" },
@@ -21,6 +24,28 @@ function isActive(pathname: string, href: string) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.subscription.unsubscribe();
+  }, []);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(null);
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <nav>
@@ -38,9 +63,20 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/login" className="nav-cta">
-            Anmelden
-          </Link>
+          {user ? (
+            <>
+              <Link href="/profil" className={isActive(pathname, "/profil") ? "active" : ""}>
+                Profil
+              </Link>
+              <button onClick={handleSignOut} className="nav-cta">
+                Abmelden
+              </button>
+            </>
+          ) : (
+            <Link href="/login" className="nav-cta">
+              Anmelden
+            </Link>
+          )}
         </div>
       </div>
     </nav>
