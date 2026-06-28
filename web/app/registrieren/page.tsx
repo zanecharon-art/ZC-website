@@ -130,7 +130,7 @@ export default function Registrieren() {
               onChange={(e) => setAgb(e.target.checked)}
             />
             <label htmlFor="agb">
-              Ich akzeptiere die <a href="#">AGB</a> und habe die <a href="#">Datenschutzerklärung</a> gelesen.
+              Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer">AGB</a> und habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen.
             </label>
           </div>
 
