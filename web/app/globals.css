@@ -53,6 +53,19 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,23,48,.95);backdrop-fil
 .nav-user{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt3);cursor:pointer;padding:6px 12px;border-radius:var(--r-md);border:1px solid var(--brd);transition:border-color var(--tr),color var(--tr)}
 .nav-user:hover{border-color:var(--gold-brd);color:var(--gold)}
 
+.nav-hamburger{display:none;position:relative;z-index:151;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:none;cursor:pointer;padding:0}
+.nav-hamburger span{display:block;width:100%;height:1.5px;background:var(--txt2);transition:transform var(--tr),opacity var(--tr)}
+.nav-hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-mobile-overlay{position:fixed;inset:0;z-index:90;background:rgba(13,23,48,.98);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--tr)}
+.nav-mobile-overlay.open{opacity:1;visibility:visible}
+.nav-mobile-links{display:flex;flex-direction:column;align-items:center;gap:24px}
+.nav-mobile-links a,.nav-mobile-links button{font-family:var(--serif);font-size:22px;color:var(--txt2);background:none;border:none;cursor:pointer;letter-spacing:.02em;transition:color var(--tr)}
+.nav-mobile-links a:hover,.nav-mobile-links a.active,.nav-mobile-links button:hover{color:var(--gold)}
+.nav-mobile-links .nav-cta{color:var(--gold) !important;background:none !important;border:1px solid var(--gold-brd);padding:8px 22px;border-radius:var(--r-md);margin-top:6px;font-size:14px !important;text-transform:uppercase;letter-spacing:.04em}
+
 /* ── PAGE WRAPPER ── */
 .page{min-height:calc(100vh - 60px);animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -425,7 +438,8 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 }
 @media(max-width:600px){
   nav{padding:0 16px}
-  .nav-links button:not(.nav-cta),.nav-links a:not(.nav-cta){display:none}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
   .grid-3,.grid-2{grid-template-columns:1fr}
   .section,.section-narrow{padding:40px 20px}
   .hero{padding:60px 20px 48px}

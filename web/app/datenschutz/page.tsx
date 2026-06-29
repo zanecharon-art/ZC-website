@@ -37,9 +37,12 @@ export default function Datenschutz() {
         <h3 style={{ marginTop: 28 }}>3. Registrierung und Nutzerkonto</h3>
         <p>
           Für die Erstellung eines Nutzerkontos verarbeiten wir E-Mail-Adresse,
-          Nutzername und die von dir angegebenen Profilinformationen. Die
-          Authentifizierung und Speicherung dieser Daten erfolgt über Supabase
-          (Supabase Inc.) als Auftragsverarbeiter.
+          Nutzername, Geburtsdatum und die von dir angegebenen
+          Profilinformationen. Das Geburtsdatum dient ausschließlich der
+          Altersverifizierung (Mindestalter 16 Jahre gemäß Art. 8 DSGVO) und
+          wird nicht veröffentlicht. Die Authentifizierung und Speicherung
+          dieser Daten erfolgt über Supabase (Supabase Inc.) als
+          Auftragsverarbeiter.
         </p>
 
         <h3 style={{ marginTop: 28 }}>4. Zahlungsabwicklung</h3>
