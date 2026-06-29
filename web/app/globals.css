@@ -382,6 +382,22 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 .ppp-download{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;background:rgba(212,168,83,.04);font-size:13px;color:var(--txt2);font-family:var(--sans);transition:background var(--tr)}
 .ppp-download:hover{background:rgba(212,168,83,.08)}
 
+/* ── VIDEO-POEMS GALLERY ── */
+.video-gallery{display:flex;flex-direction:column;gap:18px}
+.video-tile{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--brd);cursor:pointer;transition:border-color var(--tr)}
+.video-tile:hover{border-color:var(--gold-brd)}
+.video-tile-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(212,168,83,.10),transparent 60%);pointer-events:none}
+.video-tile-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(212,168,83,.16);border:1px solid var(--gold-brd);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:transform .25s,background .25s;z-index:1;pointer-events:none}
+.video-tile:hover .video-tile-play,.video-tile.active .video-tile-play{transform:translate(-50%,-50%) scale(1.08);background:rgba(212,168,83,.26)}
+.video-tile-badge{position:absolute;top:14px;left:14px;z-index:3;background:rgba(13,23,48,.8);border:1px solid var(--gold-brd);border-radius:20px;padding:5px 12px;font-size:10px;color:var(--gold-lt);font-family:var(--sans);letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(6px)}
+.video-tile-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:20px 22px;background:linear-gradient(to top,rgba(13,23,48,.88) 0%,rgba(13,23,48,.2) 45%,transparent 72%);opacity:0;transition:opacity var(--tr);z-index:2}
+.video-tile:hover .video-tile-overlay,.video-tile.active .video-tile-overlay{opacity:1}
+.video-tile-title{font-family:var(--serif);font-size:clamp(18px,2.4vw,24px);color:var(--txt);font-weight:400;letter-spacing:-.01em}
+.video-tile-meta{font-size:10px;color:var(--txt3);font-family:var(--sans);letter-spacing:.06em;text-transform:uppercase;margin-top:5px}
+.video-tile-watch{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;font-family:var(--serif);font-size:16px;color:var(--gold-lt);background:none;border:none;cursor:pointer;letter-spacing:.01em;transition:color var(--tr);text-decoration:none}
+.video-tile-watch:hover{color:var(--gold)}
+.video-tile-watch svg{flex-shrink:0}
+
 /* ── AMBIENT BAR ── */
 .ambient-bar {
   position: fixed;
