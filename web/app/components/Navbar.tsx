@@ -1,10 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
+
+function subscribeNoop() {
+  return () => {};
+}
+
+function useMounted() {
+  return useSyncExternalStore(subscribeNoop, () => true, () => false);
+}
 
 const NAV_LINKS = [
   { href: "/", label: "Start" },
@@ -26,6 +35,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
     const supabase = createClient();
@@ -39,10 +50,18 @@ export default function Navbar() {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   async function handleSignOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
     setUser(null);
+    setMenuOpen(false);
     router.push("/");
     router.refresh();
   }
@@ -78,7 +97,54 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+        <button
+          className="nav-hamburger"
+          aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
+
+      {mounted &&
+        createPortal(
+          <div className={`nav-mobile-overlay${menuOpen ? " open" : ""}`}>
+            <div className="nav-mobile-links">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={isActive(pathname, link.href) ? "active" : ""}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              {user ? (
+                <>
+                  <Link
+                    href="/profil"
+                    className={isActive(pathname, "/profil") ? "active" : ""}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Profil
+                  </Link>
+                  <button onClick={handleSignOut} className="nav-cta">
+                    Abmelden
+                  </button>
+                </>
+              ) : (
+                <Link href="/login" className="nav-cta" onClick={() => setMenuOpen(false)}>
+                  Anmelden
+                </Link>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </nav>
   );
 }

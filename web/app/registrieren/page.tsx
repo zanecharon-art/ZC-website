@@ -13,9 +13,17 @@ export default function Registrieren() {
   const [phone, setPhone] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [birthdate, setBirthdate] = useState("");
   const [communityRules, setCommunityRules] = useState(false);
   const [agb, setAgb] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  function isAtLeast16(dateStr: string) {
+    const birth = new Date(dateStr);
+    const cutoff = new Date();
+    cutoff.setFullYear(cutoff.getFullYear() - 16);
+    return birth <= cutoff;
+  }
 
   async function handleGoogle() {
     showToast("Google-Registrierung wird gestartet…");
@@ -28,6 +36,10 @@ export default function Registrieren() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!isAtLeast16(birthdate)) {
+      showToast("Du musst mindestens 16 Jahre alt sein, um dich zu registrieren.");
+      return;
+    }
     if (!communityRules || !agb) {
       showToast("Bitte akzeptiere die Community-Regeln und die AGB.");
       return;
@@ -37,7 +49,7 @@ export default function Registrieren() {
       email,
       password,
       options: {
-        data: { username, phone },
+        data: { username, phone, birthdate },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
@@ -86,6 +98,16 @@ export default function Registrieren() {
               placeholder="+49 …"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Geburtsdatum</label>
+            <input
+              type="date"
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
+              max={new Date().toISOString().split("T")[0]}
+              required
             />
           </div>
           <div className="form-group">

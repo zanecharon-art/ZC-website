@@ -7,8 +7,33 @@ import { createClient } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
 import { startCheckout } from "@/lib/checkout";
 
+const VIDEOS = [
+  {
+    id: "stille-vor-dem-riss",
+    title: "Stille vor dem Riss",
+    meta: "Video-Poem I · 2:34 · Frei",
+    locked: false,
+    gradient: "linear-gradient(135deg,#0d1f4a 0%,#1a0d3a 55%,#0d1730 100%)",
+  },
+  {
+    id: "kranichflug",
+    title: "Kranichflug",
+    meta: "Video-Poem II · 3:12 · Frei",
+    locked: false,
+    gradient: "linear-gradient(135deg,#1a0d3a 0%,#3a1030 50%,#0d1730 100%)",
+  },
+  {
+    id: "geteilter-himmel",
+    title: "Geteilter Himmel — Visual Poem",
+    meta: "Video-Poem III · 5:22 · Mitglieder",
+    locked: true,
+    gradient: "linear-gradient(135deg,#0d2a4a 0%,#0d1730 60%,#1a0d3a 100%)",
+  },
+];
+
 export default function Poems() {
   const [user, setUser] = useState<User | null>(null);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -116,6 +141,80 @@ export default function Poems() {
                 🔒 Vollständig anhören
               </Link>
             </div>
+          </div>
+        </div>
+
+        <hr className="divider" style={{ margin: "40px 0" }} />
+
+        <div style={{ marginBottom: 40 }}>
+          <span className="section-label">Video-Poems</span>
+          <h2 style={{ fontSize: "clamp(22px,2.8vw,32px)", marginBottom: 8, lineHeight: 1.15 }}>
+            Zum <em style={{ color: "var(--gold)" }}>Ansehen</em>
+          </h2>
+          <p
+            style={{
+              maxWidth: 520,
+              fontSize: 14,
+              color: "var(--txt3)",
+              lineHeight: 1.8,
+              fontWeight: 300,
+              marginBottom: 24,
+            }}
+          >
+            Bewegte Poems — Bild, Stimme und Klang in einem. Tippe ein Video an, um die Wiedergabe zu starten.
+          </p>
+
+          <div className="video-gallery">
+            {VIDEOS.map((video) => {
+              const active = activeVideo === video.id;
+              return (
+                <div
+                  key={video.id}
+                  className={`video-tile${active ? " active" : ""}`}
+                  style={{ background: video.gradient }}
+                  onClick={() => setActiveVideo(active ? null : video.id)}
+                >
+                  <div className="video-tile-bg" />
+                  <div className="video-tile-play" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                      <path d="M9 6 L22 14 L9 22 Z" fill="var(--gold-lt)" />
+                    </svg>
+                  </div>
+                  {video.locked && <div className="video-tile-badge">🔒 Mitglieder</div>}
+                  <div className="video-tile-overlay">
+                    <div className="video-tile-info">
+                      <div className="video-tile-title">{video.title}</div>
+                      <div className="video-tile-meta">{video.meta}</div>
+                    </div>
+                    {video.locked ? (
+                      <Link
+                        href="/registrieren"
+                        className="video-tile-watch"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Freischalten
+                        <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                          <path d="M9 6 L22 14 L9 22 Z" fill="currentColor" />
+                        </svg>
+                      </Link>
+                    ) : (
+                      <button
+                        className="video-tile-watch"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          showToast(`Video wird abgespielt: ${video.title}`);
+                        }}
+                      >
+                        Ansehen
+                        <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                          <path d="M9 6 L22 14 L9 22 Z" fill="currentColor" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 

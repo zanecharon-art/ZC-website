@@ -1,0 +1,24 @@
+# Fly.io configuration for the Zane Charon site (Next.js standalone).
+# Deploy from this directory with:  fly deploy
+# First-time setup:                 fly launch --no-deploy   (creates the app)
+
+app = "zane-charon"
+primary_region = "fra"   # Frankfurt — closest to a German audience
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  # Scale to zero when idle so an unused preview costs effectively nothing.
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+[env]
+  NODE_ENV = "production"
