@@ -23,6 +23,8 @@ ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 # Placeholder so modules that read it at import time don't throw during build.
 ENV STRIPE_SECRET_KEY=sk_test_placeholder
 ENV NEXT_TELEMETRY_DISABLED=1
+# Produce .next/standalone for the runner stage below.
+ENV BUILD_STANDALONE=1
 
 RUN npm run build
 
