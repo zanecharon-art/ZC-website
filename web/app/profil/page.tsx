@@ -8,6 +8,15 @@ export const metadata = {
 };
 
 export default async function Profil() {
+  // No Supabase credentials configured → no session possible; send to login
+  // instead of crashing the server client (e.g. a preview deploy without keys).
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    redirect("/login");
+  }
+
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
