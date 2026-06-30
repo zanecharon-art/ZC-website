@@ -8,12 +8,12 @@ import { showToast } from "@/lib/toast";
 
 export default function Login() {
   const router = useRouter();
-  const supabase = createClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleOAuth(provider: "google" | "apple") {
+    const supabase = createClient();
     showToast(
       provider === "google"
         ? "Google-Anmeldung wird gestartet…"
@@ -28,6 +28,7 @@ export default function Login() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const supabase = createClient();
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);

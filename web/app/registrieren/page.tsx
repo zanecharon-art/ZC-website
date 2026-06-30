@@ -8,7 +8,6 @@ import { showToast } from "@/lib/toast";
 
 export default function Registrieren() {
   const router = useRouter();
-  const supabase = createClient();
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [username, setUsername] = useState("");
@@ -26,6 +25,7 @@ export default function Registrieren() {
   }
 
   async function handleGoogle() {
+    const supabase = createClient();
     showToast("Google-Registrierung wird gestartet…");
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -44,6 +44,7 @@ export default function Registrieren() {
       showToast("Bitte akzeptiere die Community-Regeln und die AGB.");
       return;
     }
+    const supabase = createClient();
     setLoading(true);
     const { error } = await supabase.auth.signUp({
       email,
