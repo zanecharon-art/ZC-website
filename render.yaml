@@ -1,0 +1,16 @@
+# Render.com Blueprint — deploys the Next.js app in web/ on the free plan.
+# In Render: New → Blueprint → connect this repo → Apply. No credit card needed.
+services:
+  - type: web
+    name: zane-charon
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: web
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
