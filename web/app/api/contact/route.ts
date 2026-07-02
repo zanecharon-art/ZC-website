@@ -7,7 +7,7 @@ function getAccessKey() {
     process.env.WEB3FORMS_ACCESS_KEY ||
     process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
     ""
-  );
+  ).trim();
 }
 
 export async function POST(request: Request) {
@@ -53,8 +53,14 @@ export async function POST(request: Request) {
     });
     const data = await res.json();
     if (data.success) return NextResponse.json({ success: true });
-    return NextResponse.json({ error: "send_failed" }, { status: 502 });
+    return NextResponse.json(
+      { error: "send_failed", detail: data?.message ?? null },
+      { status: 502 }
+    );
   } catch {
-    return NextResponse.json({ error: "send_failed" }, { status: 502 });
+    return NextResponse.json(
+      { error: "send_failed", detail: "network_error" },
+      { status: 502 }
+    );
   }
 }
