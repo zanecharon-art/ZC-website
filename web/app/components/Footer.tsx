@@ -54,9 +54,7 @@ export default function Footer() {
           <a href="#" onClick={(e) => { e.preventDefault(); showToast("Widerruf [Platzhalter]"); }}>
             Widerruf
           </a>
-          <a href="#" onClick={(e) => { e.preventDefault(); showToast("Kontakt"); }}>
-            Kontakt
-          </a>
+          <Link href="/kontakt">Kontakt</Link>
         </div>
       </div>
     </footer>
