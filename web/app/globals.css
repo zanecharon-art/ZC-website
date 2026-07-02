@@ -200,9 +200,10 @@ hr.divider{border:none;border-top:1px solid var(--brd);margin:0}
 .form-box .form-sub{text-align:center;color:var(--txt3);font-size:13px;margin-bottom:32px;font-weight:300;letter-spacing:.01em}
 .form-group{margin-bottom:18px}
 .form-group label{font-size:13px;color:var(--txt3);display:block;margin-bottom:6px}
-.form-group input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--brd);border-radius:var(--r-md);color:var(--txt);padding:11px 14px;font-family:var(--sans);font-size:14px;transition:border-color var(--tr)}
-.form-group input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,168,83,.12)}
-.form-group input::placeholder{color:var(--txt4)}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--brd);border-radius:var(--r-md);color:var(--txt);padding:11px 14px;font-family:var(--sans);font-size:14px;transition:border-color var(--tr)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,168,83,.12)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--txt4)}
+.form-group textarea{resize:vertical;min-height:130px;line-height:1.6}
 .form-divider{text-align:center;color:var(--txt4);font-size:13px;margin:16px 0;position:relative}
 .form-divider::before,.form-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--brd)}
 .form-divider::before{left:0}.form-divider::after{right:0}
