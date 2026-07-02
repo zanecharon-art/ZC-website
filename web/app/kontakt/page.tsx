@@ -45,7 +45,12 @@ export default function Kontakt() {
         // Versand noch nicht konfiguriert → freundlicher Hinweis auf die E-Mail.
         showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
       } else {
-        showToast(`Senden fehlgeschlagen. Bitte schreib mir an ${EMAIL}.`);
+        let detail = "";
+        try {
+          const d = await res.json();
+          if (d?.detail) detail = ` (${d.detail})`;
+        } catch {}
+        showToast(`Senden fehlgeschlagen${detail}. Bitte schreib mir an ${EMAIL}.`);
       }
     } catch {
       setStatus("idle");
