@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
 
 export default function Registrieren() {
@@ -25,6 +25,10 @@ export default function Registrieren() {
   }
 
   async function handleGoogle() {
+    if (!isSupabaseConfigured()) {
+      showToast("Registrierung ist noch nicht konfiguriert.");
+      return;
+    }
     const supabase = createClient();
     showToast("Google-Registrierung wird gestartet…");
     const { error } = await supabase.auth.signInWithOAuth({
@@ -42,6 +46,10 @@ export default function Registrieren() {
     }
     if (!communityRules || !agb) {
       showToast("Bitte akzeptiere die Community-Regeln und die AGB.");
+      return;
+    }
+    if (!isSupabaseConfigured()) {
+      showToast("Registrierung ist noch nicht konfiguriert.");
       return;
     }
     const supabase = createClient();

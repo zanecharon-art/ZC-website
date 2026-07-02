@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
 import { startCheckout } from "@/lib/checkout";
 
@@ -36,6 +36,7 @@ export default function Poems() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) return;
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
   }, []);

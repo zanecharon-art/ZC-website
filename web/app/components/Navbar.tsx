@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 function subscribeNoop() {
   return () => {};
@@ -39,6 +39,10 @@ export default function Navbar() {
   const mounted = useMounted();
 
   useEffect(() => {
+    // No Supabase keys (e.g. a preview deploy) → skip auth so the browser
+    // client isn't created with undefined config, which would throw.
+    if (!isSupabaseConfigured()) return;
+
     const supabase = createClient();
 
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
@@ -58,6 +62,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   async function handleSignOut() {
+    if (!isSupabaseConfigured()) return;
     const supabase = createClient();
     await supabase.auth.signOut();
     setUser(null);
