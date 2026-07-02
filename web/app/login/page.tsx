@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
 
 export default function Login() {
@@ -13,6 +13,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   async function handleOAuth(provider: "google" | "apple") {
+    if (!isSupabaseConfigured()) {
+      showToast("Anmeldung ist noch nicht konfiguriert.");
+      return;
+    }
     const supabase = createClient();
     showToast(
       provider === "google"
@@ -28,6 +32,10 @@ export default function Login() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!isSupabaseConfigured()) {
+      showToast("Anmeldung ist noch nicht konfiguriert.");
+      return;
+    }
     const supabase = createClient();
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
