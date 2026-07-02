@@ -23,36 +23,28 @@ export default function Kontakt() {
     e.preventDefault();
     if (honeypot) return; // Bot-Falle: unsichtbares Feld ausgefüllt → ignorieren
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      // Formular noch nicht aktiviert → freundlicher Hinweis auf die E-Mail.
-      showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
-      return;
-    }
-
     setStatus("sending");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: accessKey,
-          from_name: "Zane Charon — Website",
-          subject: `[${anfrage}] Nachricht von ${name}`,
-          name,
-          email,
-          message,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, anfrage, message }),
       });
-      const data = await res.json();
-      if (data.success) {
+
+      if (res.ok) {
         setStatus("sent");
         setName("");
         setEmail("");
         setAnfrage(ANFRAGE_ARTEN[0]);
         setMessage("");
+        return;
+      }
+
+      setStatus("idle");
+      if (res.status === 503) {
+        // Versand noch nicht konfiguriert → freundlicher Hinweis auf die E-Mail.
+        showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
       } else {
-        setStatus("idle");
         showToast(`Senden fehlgeschlagen. Bitte schreib mir an ${EMAIL}.`);
       }
     } catch {
