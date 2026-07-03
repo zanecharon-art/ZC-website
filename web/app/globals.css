@@ -193,6 +193,11 @@ hr.divider{border:none;border-top:1px solid var(--brd);margin:0}
 .topic-title{font-size:16px;color:var(--txt);font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
 .topic-meta{font-size:10px;color:var(--txt4);margin-top:3px;font-family:var(--sans);letter-spacing:.04em;text-transform:uppercase}
 .topic-replies{font-size:11px;color:var(--txt3);font-family:var(--sans);letter-spacing:.03em}
+.post-item{background:var(--bg-card);border:1px solid var(--brd);border-radius:var(--r-md);padding:16px 18px;margin-bottom:12px}
+.post-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.link-btn{background:none;border:none;cursor:pointer;color:var(--txt4);font-family:var(--sans);font-size:12px;letter-spacing:.03em;padding:0;transition:color var(--tr);text-decoration:none}
+.link-btn:hover{color:var(--gold)}
+.link-btn.danger:hover{color:#e0736e}
 
 /* ── LOGIN FORM ── */
 .form-box{background:var(--bg-card);border:1px solid var(--brd);border-radius:var(--r-xl);padding:40px;max-width:460px;margin:60px auto}
