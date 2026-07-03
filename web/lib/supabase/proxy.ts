@@ -14,30 +14,32 @@ export async function updateSession(request: NextRequest) {
     return response;
   }
 
-  const supabase = createServerClient(
-    supabaseUrl,
-    supabaseAnonKey,
-    {
+  try {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          );
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
           );
         },
       },
-    }
-  );
+    });
 
-  // Refreshes the auth token if needed and writes it back to the
-  // request/response cookies above — do not remove this call.
-  await supabase.auth.getUser();
+    // Refresh the auth token if needed. Cap it so a slow or unreachable
+    // Supabase can never hang a request (which would fail health checks), and
+    // never let a session-refresh error take the whole site down.
+    await Promise.race([
+      supabase.auth.getUser(),
+      new Promise((resolve) => setTimeout(resolve, 3000)),
+    ]);
+  } catch {
+    // Ignore — the page still renders; the session just isn't refreshed here.
+  }
 
   return response;
 }
