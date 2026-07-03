@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { showToast } from "@/lib/toast";
 
-const EMAIL = "zanecharon@gmail.com";
 const ANFRAGE_ARTEN = [
   "Allgemeine Nachricht",
   "Presse & Interview",
@@ -32,7 +31,7 @@ export default function Kontakt() {
 
       if (!key) {
         setStatus("idle");
-        showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
+        showToast("Das Formular ist gerade nicht verfügbar. Bitte versuche es in Kürze erneut.");
         return;
       }
 
@@ -61,11 +60,11 @@ export default function Kontakt() {
       }
 
       setStatus("idle");
-      const detail = data?.message ? ` (${data.message})` : "";
-      showToast(`Senden fehlgeschlagen${detail}. Bitte schreib mir an ${EMAIL}.`);
+      if (data?.message) console.error("Web3Forms:", data.message);
+      showToast("Senden fehlgeschlagen. Bitte versuche es in Kürze noch einmal.");
     } catch {
       setStatus("idle");
-      showToast(`Senden fehlgeschlagen. Bitte schreib mir an ${EMAIL}.`);
+      showToast("Senden fehlgeschlagen. Bitte versuche es in Kürze noch einmal.");
     }
   }
 
@@ -74,40 +73,17 @@ export default function Kontakt() {
       <div className="section" style={{ maxWidth: 760 }}>
         <span className="section-label">Kontakt</span>
         <h2 className="section-title">Kontakt &amp; Zusammenarbeit</h2>
-        <p style={{ maxWidth: 620, fontSize: 15, lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
+        <p style={{ maxWidth: 620, fontSize: 15, lineHeight: 1.8, fontWeight: 300, marginBottom: 40 }}>
           Ob ein Wort zu meinen Geschichten, eine Presseanfrage, eine Einladung
-          zur Lesung oder eine mögliche Zusammenarbeit — ich freue mich, von dir
-          zu hören.
+          zur Lesung oder eine mögliche Zusammenarbeit — schreib mir einfach über
+          das Formular und wähle die passende Art der Anfrage. Ich melde mich so
+          bald wie möglich bei dir.
         </p>
-
-        <div className="grid-2" style={{ marginBottom: 40 }}>
-          <div className="card">
-            <span className="section-label" style={{ marginBottom: 10 }}>Allgemein</span>
-            <p style={{ fontSize: 14, color: "var(--txt3)", lineHeight: 1.7, marginBottom: 14 }}>
-              Für Nachrichten, Feedback und Leser:innen-Post.
-            </p>
-            <a href={`mailto:${EMAIL}`} style={{ fontFamily: "var(--serif)", fontSize: 17 }}>
-              {EMAIL}
-            </a>
-          </div>
-          <div className="card">
-            <span className="section-label" style={{ marginBottom: 10 }}>Zusammenarbeit &amp; Anfragen</span>
-            <p style={{ fontSize: 14, color: "var(--txt3)", lineHeight: 1.7, marginBottom: 14 }}>
-              Presse, Lesungen, Lizenzen und kommerzielle Kooperationen.
-            </p>
-            <a
-              href={`mailto:${EMAIL}?subject=${encodeURIComponent("Anfrage — Zusammenarbeit")}`}
-              style={{ fontFamily: "var(--serif)", fontSize: 17 }}
-            >
-              {EMAIL}
-            </a>
-          </div>
-        </div>
 
         <div className="card">
           <h3 style={{ fontSize: 22, marginBottom: 6 }}>Nachricht schreiben</h3>
           <p style={{ fontSize: 13, color: "var(--txt3)", marginBottom: 22, fontWeight: 300 }}>
-            Fülle das Formular aus — ich melde mich so bald wie möglich zurück.
+            Alle Felder helfen mir, deine Anfrage richtig einzuordnen.
           </p>
 
           {status === "sent" ? (
