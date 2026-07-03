@@ -73,12 +73,28 @@ export default function Kontakt() {
       <div className="section" style={{ maxWidth: 760 }}>
         <span className="section-label">Kontakt</span>
         <h2 className="section-title">Kontakt &amp; Zusammenarbeit</h2>
-        <p style={{ maxWidth: 620, fontSize: 15, lineHeight: 1.8, fontWeight: 300, marginBottom: 40 }}>
-          Ob ein Wort zu meinen Geschichten, eine Presseanfrage, eine Einladung
-          zur Lesung oder eine mögliche Zusammenarbeit — schreib mir einfach über
-          das Formular und wähle die passende Art der Anfrage. Ich melde mich so
-          bald wie möglich bei dir.
-        </p>
+        <div style={{ maxWidth: 620, marginBottom: 40 }}>
+          <p
+            style={{
+              fontFamily: "var(--serif)",
+              fontSize: 20,
+              fontStyle: "italic",
+              lineHeight: 1.7,
+              color: "var(--txt2)",
+              marginBottom: 18,
+            }}
+          >
+            Worte haben mich oft dann gefunden, wenn ich sie am nötigsten
+            brauchte. Vielleicht trägst auch du einen Gedanken mit dir, der
+            gesagt werden möchte.
+          </p>
+          <p style={{ fontSize: 15, lineHeight: 1.8, fontWeight: 300 }}>
+            Ob ein Wort zu meinen Geschichten, eine Presseanfrage, eine Einladung
+            zur Lesung oder eine mögliche Zusammenarbeit — schreib mir über das
+            Formular und wähle die passende Art der Anfrage. Ich lese jede
+            Nachricht selbst und melde mich so bald wie möglich bei dir.
+          </p>
+        </div>
 
         <div className="card">
           <h3 style={{ fontSize: 22, marginBottom: 6 }}>Nachricht schreiben</h3>

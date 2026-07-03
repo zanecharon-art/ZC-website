@@ -24,6 +24,7 @@ const NAV_LINKS = [
   { href: "/presse", label: "Presse" },
   { href: "/news", label: "News" },
   { href: "/community", label: "Community" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 function isActive(pathname: string, href: string) {
