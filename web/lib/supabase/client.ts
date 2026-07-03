@@ -1,18 +1,31 @@
 import { createBrowserClient } from "@supabase/ssr";
 
-// True only when the public Supabase env vars were present at build time
-// (they are inlined into the client bundle). Guards client-side callers so a
-// keyless preview deploy doesn't crash in the browser.
+function clean(value: string | undefined) {
+  return (value ?? "").trim();
+}
+
+function supabaseUrl() {
+  return clean(process.env.NEXT_PUBLIC_SUPABASE_URL);
+}
+
+function supabaseAnonKey() {
+  return clean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+}
+
+// True only when both public Supabase values are present AND the URL is valid.
+// Trimming + validating here means a stray space or newline from copy-paste
+// can't crash the browser client (which would take the whole page down).
 export function isSupabaseConfigured() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+  const url = supabaseUrl();
+  if (!url || !supabaseAnonKey()) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  return createBrowserClient(supabaseUrl(), supabaseAnonKey());
 }
