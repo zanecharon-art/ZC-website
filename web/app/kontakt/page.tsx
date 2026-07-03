@@ -25,13 +25,33 @@ export default function Kontakt() {
 
     setStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, anfrage, message }),
-      });
+      // Key zur Laufzeit vom Server holen (unabhängig von Build/Variablennamen).
+      const { key } = await fetch("/api/contact")
+        .then((r) => r.json())
+        .catch(() => ({ key: "" }));
 
-      if (res.ok) {
+      if (!key) {
+        setStatus("idle");
+        showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
+        return;
+      }
+
+      // Übermittlung direkt aus dem Browser an Web3Forms.
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: key,
+          from_name: "Zane Charon — Website",
+          subject: `[${anfrage}] Nachricht von ${name}`,
+          name,
+          email,
+          message,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
         setStatus("sent");
         setName("");
         setEmail("");
@@ -41,17 +61,8 @@ export default function Kontakt() {
       }
 
       setStatus("idle");
-      if (res.status === 503) {
-        // Versand noch nicht konfiguriert → freundlicher Hinweis auf die E-Mail.
-        showToast(`Bitte schreib mir direkt an ${EMAIL}.`);
-      } else {
-        let detail = "";
-        try {
-          const d = await res.json();
-          if (d?.detail) detail = ` (${d.detail})`;
-        } catch {}
-        showToast(`Senden fehlgeschlagen${detail}. Bitte schreib mir an ${EMAIL}.`);
-      }
+      const detail = data?.message ? ` (${data.message})` : "";
+      showToast(`Senden fehlgeschlagen${detail}. Bitte schreib mir an ${EMAIL}.`);
     } catch {
       setStatus("idle");
       showToast(`Senden fehlgeschlagen. Bitte schreib mir an ${EMAIL}.`);

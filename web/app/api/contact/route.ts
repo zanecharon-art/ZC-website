@@ -1,66 +1,16 @@
 import { NextResponse } from "next/server";
 
-// Reads the Web3Forms key at request time (not baked into the build), and
-// accepts either variable name so an already-set NEXT_PUBLIC_ one keeps working.
-function getAccessKey() {
-  return (
+// Returns the Web3Forms access key to the browser at request time. Web3Forms
+// keys are designed to be public (normally embedded directly in client HTML),
+// so exposing it here is fine — and it means the key works regardless of build
+// timing or which variable name was used. The browser then submits to
+// Web3Forms directly, which avoids server-to-Web3Forms connectivity problems.
+export async function GET() {
+  const key = (
     process.env.WEB3FORMS_ACCESS_KEY ||
     process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
     ""
   ).trim();
-}
 
-export async function POST(request: Request) {
-  const accessKey = getAccessKey();
-  if (!accessKey) {
-    return NextResponse.json({ error: "not_configured" }, { status: 503 });
-  }
-
-  let body: {
-    name?: string;
-    email?: string;
-    anfrage?: string;
-    message?: string;
-    botcheck?: string;
-  };
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "invalid_request" }, { status: 400 });
-  }
-
-  const { name, email, anfrage, message, botcheck } = body;
-
-  // Honeypot: a real user never fills this hidden field.
-  if (botcheck) return NextResponse.json({ success: true });
-
-  if (!name || !email || !message) {
-    return NextResponse.json({ error: "missing_fields" }, { status: 400 });
-  }
-
-  try {
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        access_key: accessKey,
-        from_name: "Zane Charon — Website",
-        subject: `[${anfrage || "Kontakt"}] Nachricht von ${name}`,
-        name,
-        email,
-        message,
-      }),
-    });
-    const data = await res.json();
-    if (data.success) return NextResponse.json({ success: true });
-    return NextResponse.json(
-      { error: "send_failed", detail: data?.message ?? null },
-      { status: 502 }
-    );
-  } catch {
-    return NextResponse.json(
-      { error: "send_failed", detail: "network_error" },
-      { status: 502 }
-    );
-  }
+  return NextResponse.json({ key });
 }
