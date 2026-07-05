@@ -15,6 +15,8 @@ export default function Registrieren() {
   const [birthdate, setBirthdate] = useState("");
   const [communityRules, setCommunityRules] = useState(false);
   const [agb, setAgb] = useState(false);
+  const [newsletter, setNewsletter] = useState(false);
+  const [birthdayGreetings, setBirthdayGreetings] = useState(false);
   const [loading, setLoading] = useState(false);
 
   function isAtLeast16(dateStr: string) {
@@ -22,6 +24,10 @@ export default function Registrieren() {
     const cutoff = new Date();
     cutoff.setFullYear(cutoff.getFullYear() - 16);
     return birth <= cutoff;
+  }
+
+  function isValidPassword(pw: string) {
+    return pw.length >= 8 && /[A-Za-z]/.test(pw) && /[0-9]/.test(pw);
   }
 
   async function handleGoogle() {
@@ -44,6 +50,10 @@ export default function Registrieren() {
       showToast("Du musst mindestens 16 Jahre alt sein, um dich zu registrieren.");
       return;
     }
+    if (!isValidPassword(password)) {
+      showToast("Das Passwort braucht mindestens 8 Zeichen mit Buchstaben und Zahlen.");
+      return;
+    }
     if (!communityRules || !agb) {
       showToast("Bitte akzeptiere die Community-Regeln und die AGB.");
       return;
@@ -58,7 +68,13 @@ export default function Registrieren() {
       email,
       password,
       options: {
-        data: { username, phone, birthdate },
+        data: {
+          username,
+          phone,
+          birthdate,
+          newsletter,
+          birthday_greetings: birthdayGreetings,
+        },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
@@ -90,8 +106,14 @@ export default function Registrieren() {
         <div className="form-divider">oder</div>
 
         <form onSubmit={handleSubmit}>
+          <p style={{ fontSize: 11, color: "var(--txt4)", marginBottom: 14 }}>
+            Mit <span style={{ color: "var(--gold)" }}>*</span> markierte Felder sind
+            Pflichtfelder.
+          </p>
           <div className="form-group">
-            <label>E-Mail</label>
+            <label>
+              E-Mail <span style={{ color: "var(--gold)" }}>*</span>
+            </label>
             <input
               type="email"
               placeholder="deine@email.de"
@@ -110,7 +132,9 @@ export default function Registrieren() {
             />
           </div>
           <div className="form-group">
-            <label>Geburtsdatum</label>
+            <label>
+              Geburtsdatum <span style={{ color: "var(--gold)" }}>*</span>
+            </label>
             <input
               type="date"
               value={birthdate}
@@ -120,7 +144,9 @@ export default function Registrieren() {
             />
           </div>
           <div className="form-group">
-            <label>Nutzername (öffentlich sichtbar)</label>
+            <label>
+              Nutzername (öffentlich sichtbar) <span style={{ color: "var(--gold)" }}>*</span>
+            </label>
             <input
               type="text"
               placeholder="Dein Nutzername"
@@ -130,15 +156,20 @@ export default function Registrieren() {
             />
           </div>
           <div className="form-group">
-            <label>Passwort</label>
+            <label>
+              Passwort <span style={{ color: "var(--gold)" }}>*</span>
+            </label>
             <input
               type="password"
-              placeholder="Mindestens 8 Zeichen"
+              placeholder="Passwort wählen"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               minLength={8}
               required
             />
+            <p style={{ fontSize: 11, color: "var(--txt4)", marginTop: 6 }}>
+              Mindestens 8 Zeichen, mit Buchstaben und Zahlen.
+            </p>
           </div>
 
           <div className="checkbox-row">
@@ -149,7 +180,8 @@ export default function Registrieren() {
               onChange={(e) => setCommunityRules(e.target.checked)}
             />
             <label htmlFor="community-rules">
-              Ich habe die <a href="#">Community-Regeln</a> gelesen und akzeptiere sie. Ich bestätige, dass Beiträge, die gegen die Regeln verstoßen, ohne Vorwarnung entfernt werden.
+              <span style={{ color: "var(--gold)" }}>*</span> Ich habe die{" "}
+              <a href="#">Community-Regeln</a> gelesen und akzeptiere sie. Ich bestätige, dass Beiträge, die gegen die Regeln verstoßen, ohne Vorwarnung entfernt werden.
             </label>
           </div>
 
@@ -161,7 +193,34 @@ export default function Registrieren() {
               onChange={(e) => setAgb(e.target.checked)}
             />
             <label htmlFor="agb">
-              Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer">AGB</a> und habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen.
+              <span style={{ color: "var(--gold)" }}>*</span> Ich akzeptiere die{" "}
+              <a href="/agb" target="_blank" rel="noopener noreferrer">AGB</a> und habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen.
+            </label>
+          </div>
+
+          <div className="checkbox-row">
+            <input
+              type="checkbox"
+              id="newsletter"
+              checked={newsletter}
+              onChange={(e) => setNewsletter(e.target.checked)}
+            />
+            <label htmlFor="newsletter">
+              Ja, ich möchte den Newsletter mit Neuigkeiten zu Werken und
+              Veröffentlichungen erhalten. (freiwillig, jederzeit abbestellbar)
+            </label>
+          </div>
+
+          <div className="checkbox-row">
+            <input
+              type="checkbox"
+              id="birthday-greetings"
+              checked={birthdayGreetings}
+              onChange={(e) => setBirthdayGreetings(e.target.checked)}
+            />
+            <label htmlFor="birthday-greetings">
+              Ja, ich möchte an meinem Geburtstag eine Glückwunsch-E-Mail
+              erhalten. (freiwillig, jederzeit abbestellbar)
             </label>
           </div>
 

@@ -38,14 +38,24 @@ export default function Datenschutz() {
         <p>
           Für die Erstellung eines Nutzerkontos verarbeiten wir E-Mail-Adresse,
           Nutzername, Geburtsdatum und die von dir angegebenen
-          Profilinformationen. Das Geburtsdatum dient ausschließlich der
-          Altersverifizierung (Mindestalter 16 Jahre gemäß Art. 8 DSGVO) und
-          wird nicht veröffentlicht. Die Authentifizierung und Speicherung
-          dieser Daten erfolgt über Supabase (Supabase Inc.) als
-          Auftragsverarbeiter.
+          Profilinformationen. Das Geburtsdatum dient der Altersverifizierung
+          (Mindestalter 16 Jahre gemäß Art. 8 DSGVO) und wird nicht
+          veröffentlicht. Die Authentifizierung und Speicherung dieser Daten
+          erfolgt über Supabase (Supabase Inc.) als Auftragsverarbeiter.
         </p>
 
-        <h3 style={{ marginTop: 28 }}>4. Zahlungsabwicklung</h3>
+        <h3 style={{ marginTop: 28 }}>4. Newsletter und Geburtstagsgrüße</h3>
+        <p>
+          Wenn du bei der Registrierung ausdrücklich einwilligst, verwenden wir
+          deine E-Mail-Adresse, um dir einen Newsletter mit Neuigkeiten zu
+          senden, und/oder dein Geburtsdatum, um dir an deinem Geburtstag eine
+          Glückwunsch-E-Mail zu schicken. Rechtsgrundlage ist deine Einwilligung
+          (Art. 6 Abs. 1 lit. a DSGVO). Beide Einwilligungen sind freiwillig und
+          können jederzeit mit Wirkung für die Zukunft widerrufen werden – über
+          den Abmeldelink in jeder E-Mail oder per Nachricht an uns.
+        </p>
+
+        <h3 style={{ marginTop: 28 }}>5. Zahlungsabwicklung</h3>
         <p>
           Käufe (einzelne Kapitel, Bundles, Download-Pakete) werden über
           Stripe Payments Europe, Ltd. abgewickelt. Im Rahmen des Kaufs
@@ -55,14 +65,14 @@ export default function Datenschutz() {
           verarbeitet und erreichen unsere Server nicht.
         </p>
 
-        <h3 style={{ marginTop: 28 }}>5. Cookies</h3>
+        <h3 style={{ marginTop: 28 }}>6. Cookies</h3>
         <p>
           Wir setzen technisch notwendige Cookies ein, um deine Anmeldesitzung
           aufrechtzuerhalten. Diese Cookies werden nicht zu Werbe- oder
           Trackingzwecken verwendet.
         </p>
 
-        <h3 style={{ marginTop: 28 }}>6. Deine Rechte</h3>
+        <h3 style={{ marginTop: 28 }}>7. Deine Rechte</h3>
         <p>
           Du hast das Recht auf Auskunft, Berichtigung, Löschung und
           Einschränkung der Verarbeitung deiner personenbezogenen Daten sowie
