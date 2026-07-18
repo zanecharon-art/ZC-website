@@ -10,7 +10,9 @@
   --gold-lt:   #c39d5a;
   --gold-dim:  rgba(168,127,69,.14);
   --gold-brd:  rgba(168,127,69,.32);
-  --pink:      #bb7d6f;
+  --pink:      #cf8d84;
+  --pink-dim:  rgba(207,141,132,.14);
+  --pink-brd:  rgba(207,141,132,.34);
   --blue:      #6f8391;
   --green:     #6f8f5f;
   --txt:       #33302a;
@@ -72,13 +74,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,242,233,.9);backdrop-f
 
 /* ── HERO ── */
 .hero{padding:90px 40px 70px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(212,168,83,.10) 0%,transparent 60%);position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 30%,rgba(212,86,126,.05) 0%,transparent 50%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 82% 26%,rgba(207,141,132,.20) 0%,transparent 52%);pointer-events:none}
 .eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;display:block;margin-bottom:18px;font-family:var(--sans)}
 .hero h1{font-size:clamp(34px,5vw,56px);max-width:640px;margin:0 auto 20px;font-weight:500;letter-spacing:-.02em}
 .hero p{color:var(--txt3);max-width:420px;margin:0 auto 36px;font-size:16px;font-weight:300;line-height:1.75}
 .hero-deco{position:absolute;font-size:200px;opacity:.04;pointer-events:none;user-select:none;font-family:var(--serif)}
 .hero-deco.left{left:-40px;top:20px}
-.hero-deco.right{right:-40px;bottom:-20px;color:var(--pink)}
+.hero-deco.right{right:-40px;bottom:-20px;color:var(--pink);opacity:.09}
 
 /* ── BUTTONS ── */
 .btn{display:inline-block;background:var(--gold);color:var(--bg);border:none;border-radius:var(--r-md);padding:11px 28px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:background var(--tr),transform var(--tr)}
@@ -293,7 +295,7 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 }
 
 /* ── TAG ── */
-.tag{display:inline-block;font-size:11px;color:var(--txt3);background:rgba(70,52,30,.06);border:1px solid var(--brd);border-radius:20px;padding:3px 10px;margin:2px}
+.tag{display:inline-block;font-size:11px;color:#a5605a;background:var(--pink-dim);border:1px solid var(--pink-brd);border-radius:20px;padding:3px 10px;margin:2px}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:28px;right:28px;background:var(--bg-card);border:1px solid var(--gold-brd);border-radius:var(--r-md);padding:14px 20px;font-size:14px;color:var(--txt);box-shadow:var(--shadow);z-index:999;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;pointer-events:none}
@@ -301,7 +303,7 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 
 /* ── LANDING HERO ── */
 .lp-hero{position:relative;width:100%;min-height:100vh;overflow:hidden;display:flex;align-items:stretch;background:var(--bg)}
-.lp-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 62% 42%,rgba(150,110,70,.34) 0%,transparent 52%),radial-gradient(ellipse at 18% 82%,rgba(212,86,126,.09) 0%,transparent 44%),radial-gradient(ellipse at 92% 8%,rgba(212,168,83,.08) 0%,transparent 38%)}
+.lp-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 62% 42%,rgba(150,110,70,.30) 0%,transparent 52%),radial-gradient(ellipse at 16% 80%,rgba(207,141,132,.28) 0%,transparent 46%),radial-gradient(ellipse at 90% 10%,rgba(207,141,132,.18) 0%,transparent 42%)}
 .lp-deco-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .lp-photo-area{position:absolute;right:7%;bottom:0;width:36%;max-width:500px;height:90%;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
 .lp-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-left:1px solid rgba(212,168,83,.07)}

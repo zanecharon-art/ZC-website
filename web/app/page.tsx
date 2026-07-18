@@ -75,31 +75,31 @@ export default function Home() {
             <path d="M41 43 Q46 48 51 45 Q53 42 51 37" stroke="#e0c47e" strokeWidth="1.2" fill="none" strokeLinecap="round" />
           </g>
           <g opacity="0.22">
-            <circle cx="975" cy="55" r="5.5" fill="#d4567e" />
-            <circle cx="1008" cy="38" r="4" fill="#d4567e" />
-            <circle cx="1042" cy="70" r="4.5" fill="#d4567e" />
+            <circle cx="975" cy="55" r="5.5" fill="#cf8d84" />
+            <circle cx="1008" cy="38" r="4" fill="#cf8d84" />
+            <circle cx="1042" cy="70" r="4.5" fill="#cf8d84" />
             <circle cx="955" cy="85" r="3.5" fill="#e87aaa" />
-            <circle cx="1072" cy="50" r="3" fill="#d4567e" />
+            <circle cx="1072" cy="50" r="3" fill="#cf8d84" />
             <circle cx="1025" cy="88" r="3" fill="#e87aaa" />
-            <line x1="975" y1="58" x2="1008" y2="42" stroke="#d4567e" strokeWidth="0.8" opacity="0.35" />
-            <line x1="1008" y1="42" x2="1042" y2="73" stroke="#d4567e" strokeWidth="0.8" opacity="0.35" />
-            <line x1="1042" y1="73" x2="1072" y2="53" stroke="#d4567e" strokeWidth="0.8" opacity="0.35" />
+            <line x1="975" y1="58" x2="1008" y2="42" stroke="#cf8d84" strokeWidth="0.8" opacity="0.35" />
+            <line x1="1008" y1="42" x2="1042" y2="73" stroke="#cf8d84" strokeWidth="0.8" opacity="0.35" />
+            <line x1="1042" y1="73" x2="1072" y2="53" stroke="#cf8d84" strokeWidth="0.8" opacity="0.35" />
           </g>
           <g opacity="0.18">
             <path d="M1060 640 Q1110 590 1165 558" stroke="#5a3040" strokeWidth="2.5" fill="none" strokeLinecap="round" />
             <path d="M1085 615 Q1098 595 1110 588" stroke="#5a3040" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-            <circle cx="1110" cy="588" r="5" fill="#d4567e" opacity="0.7" />
-            <circle cx="1165" cy="558" r="6" fill="#d4567e" opacity="0.6" />
+            <circle cx="1110" cy="588" r="5" fill="#cf8d84" opacity="0.7" />
+            <circle cx="1165" cy="558" r="6" fill="#cf8d84" opacity="0.6" />
             <circle cx="1135" cy="573" r="3.5" fill="#e87aaa" opacity="0.6" />
-            <circle cx="1150" cy="600" r="3" fill="#d4567e" opacity="0.5" />
+            <circle cx="1150" cy="600" r="3" fill="#cf8d84" opacity="0.5" />
           </g>
           <g opacity="0.16">
-            <circle cx="72" cy="555" r="4" fill="#d4567e" />
+            <circle cx="72" cy="555" r="4" fill="#cf8d84" />
             <circle cx="105" cy="575" r="3" fill="#e87aaa" />
-            <circle cx="48" cy="585" r="3.5" fill="#d4567e" />
-            <circle cx="125" cy="548" r="2.5" fill="#d4567e" />
-            <line x1="72" y1="558" x2="105" y2="578" stroke="#d4567e" strokeWidth="0.7" opacity="0.4" />
-            <line x1="48" y1="588" x2="72" y2="558" stroke="#d4567e" strokeWidth="0.7" opacity="0.4" />
+            <circle cx="48" cy="585" r="3.5" fill="#cf8d84" />
+            <circle cx="125" cy="548" r="2.5" fill="#cf8d84" />
+            <line x1="72" y1="558" x2="105" y2="578" stroke="#cf8d84" strokeWidth="0.7" opacity="0.4" />
+            <line x1="48" y1="588" x2="72" y2="558" stroke="#cf8d84" strokeWidth="0.7" opacity="0.4" />
           </g>
           <line x1="0" y1="350" x2="280" y2="290" stroke="#d4a853" strokeWidth="0.6" opacity="0.07" />
           <line x1="900" y1="700" x2="1200" y2="420" stroke="#d4a853" strokeWidth="0.6" opacity="0.07" />
@@ -173,8 +173,8 @@ export default function Home() {
               <svg className="kranich" viewBox="0 0 80 80" fill="none">
                 <path d="M20 60 Q30 30 50 25 Q65 20 68 35 Q70 45 55 50 Q45 53 40 65" stroke="#dce8ff" strokeWidth="1.8" fill="none" strokeLinecap="round" />
                 <path d="M55 50 Q60 55 65 52 Q68 49 65 45" stroke="#dce8ff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <circle cx="35" cy="68" r="2" fill="#d4567e" opacity=".7" />
-                <circle cx="42" cy="72" r="1.5" fill="#d4567e" opacity=".5" />
+                <circle cx="35" cy="68" r="2" fill="#cf8d84" opacity=".7" />
+                <circle cx="42" cy="72" r="1.5" fill="#cf8d84" opacity=".5" />
               </svg>
             </div>
             <div>

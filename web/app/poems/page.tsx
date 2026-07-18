@@ -101,10 +101,10 @@ export default function Poems() {
                 <path d="M10 80 Q20 42 38 34 Q52 27 54 44 Q55 56 42 60 Q33 63 29 76" stroke="#d4a853" strokeWidth="1.8" fill="none" strokeLinecap="round" />
                 <path d="M42 60 Q48 66 54 62 Q57 59 54 52" stroke="#d4a853" strokeWidth="1.4" fill="none" strokeLinecap="round" />
               </g>
-              <circle cx="60" cy="50" r="4" fill="#d4567e" opacity=".3" />
-              <circle cx="88" cy="35" r="3" fill="#d4567e" opacity=".25" />
-              <circle cx="340" cy="240" r="5" fill="#d4567e" opacity=".25" />
-              <circle cx="365" cy="220" r="3.5" fill="#d4567e" opacity=".2" />
+              <circle cx="60" cy="50" r="4" fill="#cf8d84" opacity=".3" />
+              <circle cx="88" cy="35" r="3" fill="#cf8d84" opacity=".25" />
+              <circle cx="340" cy="240" r="5" fill="#cf8d84" opacity=".25" />
+              <circle cx="365" cy="220" r="3.5" fill="#cf8d84" opacity=".2" />
             </svg>
             <div className="poems-featured-play">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">

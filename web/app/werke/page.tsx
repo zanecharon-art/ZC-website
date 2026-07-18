@@ -18,8 +18,8 @@ export default function Werke() {
               <svg className="kranich" viewBox="0 0 80 80" fill="none">
                 <path d="M20 60 Q30 30 50 25 Q65 20 68 35 Q70 45 55 50 Q45 53 40 65" stroke="#dce8ff" strokeWidth="1.8" fill="none" strokeLinecap="round" />
                 <path d="M55 50 Q60 55 65 52 Q68 49 65 45" stroke="#dce8ff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <circle cx="35" cy="68" r="2" fill="#d4567e" opacity=".7" />
-                <circle cx="42" cy="72" r="1.5" fill="#d4567e" opacity=".5" />
+                <circle cx="35" cy="68" r="2" fill="#cf8d84" opacity=".7" />
+                <circle cx="42" cy="72" r="1.5" fill="#cf8d84" opacity=".5" />
               </svg>
             </div>
             <div className="badge" style={{ marginBottom: 6, fontSize: 10, padding: "3px 9px" }}>
