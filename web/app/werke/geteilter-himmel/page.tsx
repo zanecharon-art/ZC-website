@@ -20,7 +20,6 @@ export default function GeteilterHimmel() {
         >
           <div
             className="book-thumb book-thumb-gh"
-            style={{ height: 270, aspectRatio: "auto" }}
             role="img"
             aria-label="Cover: Geteilter Himmel"
           ></div>

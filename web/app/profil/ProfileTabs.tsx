@@ -77,7 +77,7 @@ export default function ProfileTabs({ user }: { user: User }) {
           >
             <div
               className="book-thumb book-thumb-gh"
-              style={{ width: 60, height: 90, minWidth: 60, aspectRatio: "auto" }}
+              style={{ width: 60, minWidth: 60 }}
               role="img"
               aria-label="Cover: Geteilter Himmel"
             ></div>
