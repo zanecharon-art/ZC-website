@@ -13,21 +13,21 @@ const VIDEOS = [
     title: "Stille vor dem Riss",
     meta: "Video-Poem I · 2:34 · Frei",
     locked: false,
-    gradient: "linear-gradient(135deg,#0d1f4a 0%,#1a0d3a 55%,#0d1730 100%)",
+    gradient: "linear-gradient(135deg,#4a3a2c 0%,#5a3540 55%,#2e2419 100%)",
   },
   {
     id: "kranichflug",
     title: "Kranichflug",
     meta: "Video-Poem II · 3:12 · Frei",
     locked: false,
-    gradient: "linear-gradient(135deg,#1a0d3a 0%,#3a1030 50%,#0d1730 100%)",
+    gradient: "linear-gradient(135deg,#5a3540 0%,#5a3040 50%,#2e2419 100%)",
   },
   {
     id: "geteilter-himmel",
     title: "Geteilter Himmel — Visual Poem",
     meta: "Video-Poem III · 5:22 · Mitglieder",
     locked: true,
-    gradient: "linear-gradient(135deg,#0d2a4a 0%,#0d1730 60%,#1a0d3a 100%)",
+    gradient: "linear-gradient(135deg,#3a3a2a 0%,#2e2419 60%,#5a3540 100%)",
   },
 ];
 
@@ -101,10 +101,10 @@ export default function Poems() {
                 <path d="M10 80 Q20 42 38 34 Q52 27 54 44 Q55 56 42 60 Q33 63 29 76" stroke="#d4a853" strokeWidth="1.8" fill="none" strokeLinecap="round" />
                 <path d="M42 60 Q48 66 54 62 Q57 59 54 52" stroke="#d4a853" strokeWidth="1.4" fill="none" strokeLinecap="round" />
               </g>
-              <circle cx="60" cy="50" r="4" fill="#d4567e" opacity=".3" />
-              <circle cx="88" cy="35" r="3" fill="#d4567e" opacity=".25" />
-              <circle cx="340" cy="240" r="5" fill="#d4567e" opacity=".25" />
-              <circle cx="365" cy="220" r="3.5" fill="#d4567e" opacity=".2" />
+              <circle cx="60" cy="50" r="4" fill="#cf8d84" opacity=".3" />
+              <circle cx="88" cy="35" r="3" fill="#cf8d84" opacity=".25" />
+              <circle cx="340" cy="240" r="5" fill="#cf8d84" opacity=".25" />
+              <circle cx="365" cy="220" r="3.5" fill="#cf8d84" opacity=".2" />
             </svg>
             <div className="poems-featured-play">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
