@@ -104,8 +104,8 @@ hr.divider{border:none;border-top:1px solid var(--brd);margin:0}
 .card:hover{border-color:var(--gold-brd);transform:translateY(-2px);box-shadow:0 0 24px rgba(212,168,83,.07)}
 
 /* ── BOOK CARD ── */
-.book-thumb{width:100%;aspect-ratio:3/4;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden}
-.book-thumb-gh{background:linear-gradient(165deg,#4a3a2c 0%,#5a3a3f 55%,#2e2419 100%)}
+.book-thumb{width:100%;aspect-ratio:3/4;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(90,70,40,.20)}
+.book-thumb-gh{background:url('/covers/geteilter-himmel.jpg') center/cover no-repeat}
 .book-title{font-family:var(--serif);font-size:17px;color:var(--txt);margin-bottom:4px;font-weight:500;letter-spacing:-.01em}
 .book-meta{font-size:11px;color:var(--txt3);letter-spacing:.03em;font-weight:400}
 .book-badge{display:inline-block;font-size:11px;color:var(--green);background:rgba(90,184,138,.12);padding:3px 10px;border-radius:20px;margin-top:6px}

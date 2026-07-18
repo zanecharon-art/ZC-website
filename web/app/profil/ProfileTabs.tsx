@@ -75,11 +75,12 @@ export default function ProfileTabs({ user }: { user: User }) {
             className="card"
             style={{ display: "flex", gap: 16, alignItems: "center", marginTop: 14, cursor: "pointer", textDecoration: "none" }}
           >
-            <div className="book-thumb book-thumb-gh" style={{ width: 60, height: 90, minWidth: 60 }}>
-              <svg width="30" height="30" viewBox="0 0 80 80" fill="none">
-                <path d="M20 60 Q30 30 50 25 Q65 20 68 35 Q70 45 55 50 Q45 53 40 65" stroke="#dce8ff" strokeWidth="2" fill="none" strokeLinecap="round" />
-              </svg>
-            </div>
+            <div
+              className="book-thumb book-thumb-gh"
+              style={{ width: 60, height: 90, minWidth: 60, aspectRatio: "auto" }}
+              role="img"
+              aria-label="Cover: Geteilter Himmel"
+            ></div>
             <div>
               <div className="book-title">Geteilter Himmel</div>
               <div className="book-meta">Kapitel 1–3 freigeschaltet · 11 Kapitel verfügbar</div>
