@@ -188,7 +188,7 @@ export default function Home() {
           </Link>
 
           <div className="card">
-            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#2a2050,#120e28)" }}>
+            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#5a3a4a,#2e2028)" }}>
               <svg width="50" height="50" viewBox="0 0 50 50" fill="none" opacity=".6">
                 <path d="M10 40 Q20 15 35 12 Q45 10 47 22" stroke="#d4a853" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                 <path d="M25 8 Q28 4 32 6" stroke="#d4a853" strokeWidth="1.2" fill="none" strokeLinecap="round" />
@@ -200,7 +200,7 @@ export default function Home() {
           </div>
 
           <div className="card">
-            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#1a3038,#0a1618)" }}>
+            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#41402e,#242617)" }}>
               <svg width="50" height="50" viewBox="0 0 50 50" fill="none" opacity=".6">
                 <circle cx="25" cy="18" r="8" stroke="#d4a853" strokeWidth="1.2" fill="none" />
                 <path d="M17 18 Q10 28 14 38 M33 18 Q40 28 36 38" stroke="#d4a853" strokeWidth="1.2" fill="none" strokeLinecap="round" />
@@ -226,7 +226,7 @@ export default function Home() {
               width: 56,
               height: 56,
               borderRadius: "50%",
-              background: "linear-gradient(135deg,#1c3a7a,#2a1d4a)",
+              background: "linear-gradient(135deg,#4a3a2c,#5a3a3f)",
               border: "1px solid var(--gold-brd)",
               display: "flex",
               alignItems: "center",

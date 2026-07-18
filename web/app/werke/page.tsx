@@ -33,7 +33,7 @@ export default function Werke() {
           </Link>
 
           <div className="card" style={{ opacity: 0.7 }}>
-            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#2a2050,#120e28)" }}>
+            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#5a3a4a,#2e2028)" }}>
               <svg width="50" height="50" viewBox="0 0 50 50" fill="none" opacity=".6">
                 <path d="M10 40 Q20 15 35 12 Q45 10 47 22" stroke="#d4a853" strokeWidth="1.5" fill="none" strokeLinecap="round" />
               </svg>
@@ -46,7 +46,7 @@ export default function Werke() {
           </div>
 
           <div className="card" style={{ opacity: 0.7 }}>
-            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#1a3038,#0a1618)" }}>
+            <div className="book-thumb" style={{ background: "linear-gradient(160deg,#41402e,#242617)" }}>
               <svg width="50" height="50" viewBox="0 0 50 50" fill="none" opacity=".6">
                 <circle cx="25" cy="18" r="8" stroke="#d4a853" strokeWidth="1.2" fill="none" />
               </svg>

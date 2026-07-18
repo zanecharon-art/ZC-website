@@ -13,21 +13,21 @@ const VIDEOS = [
     title: "Stille vor dem Riss",
     meta: "Video-Poem I · 2:34 · Frei",
     locked: false,
-    gradient: "linear-gradient(135deg,#0d1f4a 0%,#1a0d3a 55%,#0d1730 100%)",
+    gradient: "linear-gradient(135deg,#4a3a2c 0%,#5a3540 55%,#2e2419 100%)",
   },
   {
     id: "kranichflug",
     title: "Kranichflug",
     meta: "Video-Poem II · 3:12 · Frei",
     locked: false,
-    gradient: "linear-gradient(135deg,#1a0d3a 0%,#3a1030 50%,#0d1730 100%)",
+    gradient: "linear-gradient(135deg,#5a3540 0%,#5a3040 50%,#2e2419 100%)",
   },
   {
     id: "geteilter-himmel",
     title: "Geteilter Himmel — Visual Poem",
     meta: "Video-Poem III · 5:22 · Mitglieder",
     locked: true,
-    gradient: "linear-gradient(135deg,#0d2a4a 0%,#0d1730 60%,#1a0d3a 100%)",
+    gradient: "linear-gradient(135deg,#3a3a2a 0%,#2e2419 60%,#5a3540 100%)",
   },
 ];
 
