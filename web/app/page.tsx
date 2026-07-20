@@ -115,20 +115,11 @@ export default function Home() {
         </svg>
 
         <div className="lp-photo-area">
-          <div className="lp-photo-placeholder">
-            <div className="lp-photo-inner">
-              <svg viewBox="0 0 160 280" width="160" height="280" fill="none">
-                <ellipse cx="80" cy="60" rx="30" ry="34" fill="rgba(212,168,83,0.10)" stroke="rgba(212,168,83,0.22)" strokeWidth="1" />
-                <path
-                  d="M40 150 Q46 108 80 103 Q114 108 120 150 L124 248 Q102 256 80 256 Q58 256 36 248 Z"
-                  fill="rgba(212,168,83,0.07)"
-                  stroke="rgba(212,168,83,0.18)"
-                  strokeWidth="1"
-                />
-              </svg>
-            </div>
-            <div className="lp-photo-hint">Dein Foto hier</div>
-          </div>
+          <div
+            className="lp-photo"
+            role="img"
+            aria-label="Zane Charon"
+          ></div>
         </div>
 
         <div className="lp-name-block">
