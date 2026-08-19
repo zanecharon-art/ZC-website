@@ -1,4 +1,5 @@
 import { MedalIcon } from "@/app/components/icons";
+import AwardCertificate from "@/app/components/AwardCertificate";
 
 export const metadata = {
   title: "Presse — Zane Charon",
@@ -18,6 +19,8 @@ export default function Presse() {
             <p>Geteilter Himmel, ausgewählt von einer renommierten Fachjury</p>
           </div>
         </div>
+
+        <AwardCertificate />
 
         <div className="grid-2">
           <div className="quote-card">
