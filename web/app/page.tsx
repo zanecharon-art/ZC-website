@@ -318,10 +318,13 @@ export default function Home() {
               </button>
               <button className="platform-btn apple" onClick={() => showToast("Öffnet Apple Music")}>
                 <svg width="15" height="15" viewBox="0 0 24 24">
-                  <path
-                    fill="#fff"
-                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c.828 0 1.5.672 1.5 1.5v6.586l1.793-1.793a1.5 1.5 0 1 1 2.121 2.121l-4.5 4.5a1.5 1.5 0 0 1-2.121 0l-4.5-4.5a1.5 1.5 0 1 1 2.121-2.121L10.5 12.586V6c0-.828.672-1.5 1.5-1.5z"
-                  />
+                  <defs>
+                    <linearGradient id="am-grad" x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#FA233B" />
+                      <stop offset="1" stopColor="#FB5C74" />
+                    </linearGradient>
+                  </defs>
+                  <path fill="url(#am-grad)" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
                 </svg>
                 Apple Music
               </button>
@@ -337,9 +340,18 @@ export default function Home() {
               </button>
               <button className="platform-btn instagram" onClick={() => showToast("Öffnet Instagram")}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" strokeWidth="2" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="white" strokeWidth="2" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  <defs>
+                    <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#FEDA75" />
+                      <stop offset="0.25" stopColor="#FA7E1E" />
+                      <stop offset="0.5" stopColor="#D62976" />
+                      <stop offset="0.75" stopColor="#962FBF" />
+                      <stop offset="1" stopColor="#4F5BD5" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad)" strokeWidth="2" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad)" strokeWidth="2" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad)" strokeWidth="2" strokeLinecap="round" />
                 </svg>
                 Instagram
               </button>
