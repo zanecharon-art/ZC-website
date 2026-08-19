@@ -161,17 +161,16 @@ export default function ThreadPage() {
 
   async function deleteThread() {
     if (!window.confirm("Dieses Thema wirklich löschen? Das kann nicht rückgängig gemacht werden.")) return;
-    const res = await fetch("/api/community/threads", {
+    const res = await fetch(`/api/community/threads?threadId=${encodeURIComponent(id)}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ threadId: id }),
     });
     if (res.ok) {
       showToast("Thema gelöscht.");
       router.push("/community");
       return;
     }
-    showToast("Löschen fehlgeschlagen.");
+    const info = await res.json().catch(() => ({}));
+    showToast("Löschen fehlgeschlagen" + (info?.error ? ` (${info.error}${info.detail ? ": " + info.detail : ""})` : "."));
   }
 
   async function savePostEdit(postId: string) {
@@ -192,17 +191,16 @@ export default function ThreadPage() {
 
   async function deletePost(postId: string) {
     if (!window.confirm("Diesen Kommentar wirklich löschen?")) return;
-    const res = await fetch("/api/community/posts", {
+    const res = await fetch(`/api/community/posts?postId=${encodeURIComponent(postId)}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ postId }),
     });
     if (res.ok) {
       refresh();
       showToast("Kommentar gelöscht.");
       return;
     }
-    showToast("Löschen fehlgeschlagen.");
+    const info = await res.json().catch(() => ({}));
+    showToast("Löschen fehlgeschlagen" + (info?.error ? ` (${info.error}${info.detail ? ": " + info.detail : ""})` : "."));
   }
 
   const isAdmin = Boolean(ADMIN_EMAIL && user?.email?.toLowerCase() === ADMIN_EMAIL);

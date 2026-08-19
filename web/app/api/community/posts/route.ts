@@ -66,7 +66,11 @@ export async function DELETE(request: Request) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  const { postId } = await request.json().catch(() => ({}));
+  let postId = new URL(request.url).searchParams.get("postId") || "";
+  if (!postId) {
+    const body = await request.json().catch(() => ({}));
+    postId = typeof body?.postId === "string" ? body.postId : "";
+  }
   if (!postId) return NextResponse.json({ error: "missing_fields" }, { status: 400 });
 
   const { error } = await supabase
@@ -74,6 +78,6 @@ export async function DELETE(request: Request) {
     .update({ status: "removed" })
     .eq("id", postId)
     .eq("author_id", user.id);
-  if (error) return NextResponse.json({ error: "delete_failed" }, { status: 500 });
+  if (error) return NextResponse.json({ error: "delete_failed", detail: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
