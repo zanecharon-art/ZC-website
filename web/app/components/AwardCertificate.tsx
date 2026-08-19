@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { MedalIcon } from "@/app/components/icons";
 
 /**
- * Displays the Young Storyteller Award Longlist certificate as an image.
- * There is no true copy-protection on the web (any screen can be captured),
- * so this relies on a tiled "zanecharon.de" watermark baked into the image
- * plus mild deterrents: no download link, drag disabled, context menu blocked.
+ * The Longlist award box doubles as a toggle: clicking it reveals the
+ * certificate inline, right below. There is no true copy-protection on the
+ * web (any screen can be captured), so this relies on a tiled "zanecharon.de"
+ * watermark baked into the image plus mild deterrents: no download link,
+ * drag disabled, context menu blocked, and the image is hidden until opened.
  */
 export default function AwardCertificate() {
   const [open, setOpen] = useState(false);
@@ -22,61 +24,65 @@ export default function AwardCertificate() {
   };
 
   return (
-    <div style={{ marginTop: 12 }}>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 7,
-          background: "none",
-          border: "none",
-          padding: "4px 0",
-          font: "inherit",
-          fontSize: 13,
-          color: "var(--gold)",
-          cursor: "pointer",
-          textDecoration: "underline",
-          textUnderlineOffset: 3,
+    <div style={{ marginBottom: 28 }}>
+      <div
+        className="award-box is-toggle"
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setOpen((v) => !v);
+          }
         }}
+        style={{ marginBottom: 0 }}
       >
-        <span aria-hidden="true">🔍</span>
-        Urkunde der Longlist-Nominierung ansehen
-      </button>
+        <div className="award-icon">
+          <MedalIcon size={28} />
+        </div>
+        <div>
+          <h3>Longlist · Young Story Teller Award 2025</h3>
+          <p>Geteilter Himmel, ausgewählt von einer renommierten Fachjury</p>
+        </div>
+        <svg
+          className={`award-chevron${open ? " open" : ""}`}
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </div>
 
       {open && (
-        <div
-          onClick={() => setOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Urkunde in voller Größe"
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 1000,
-            background: "rgba(30,24,16,.82)",
-            backdropFilter: "blur(3px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 24,
-            cursor: "zoom-out",
-          }}
-        >
+        <div style={{ animation: "certReveal .3s ease", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 22 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/auszeichnungen/ysa-2025-longlist.jpg"
             alt="Urkunde: Longlist des Young Storyteller Award 2025 (story.one & Thalia)"
             style={{
-              maxWidth: "100%",
-              maxHeight: "90vh",
+              display: "block",
+              width: "100%",
+              maxWidth: 340,
+              height: "auto",
               borderRadius: 12,
-              boxShadow: "0 20px 60px rgba(0,0,0,.5)",
+              border: "1px solid var(--gold-brd)",
+              boxShadow: "var(--shadow)",
               ...noSelect,
             }}
             {...guard}
           />
+          <p style={{ fontSize: 12, color: "var(--txt3)", marginTop: 10, textAlign: "center" }}>
+            Urkunde · story.one &amp; Thalia
+          </p>
         </div>
       )}
     </div>

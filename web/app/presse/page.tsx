@@ -1,4 +1,3 @@
-import { MedalIcon } from "@/app/components/icons";
 import AwardCertificate from "@/app/components/AwardCertificate";
 
 export const metadata = {
@@ -11,14 +10,6 @@ export default function Presse() {
       <div className="section">
         <span className="section-label">Pressestimmen</span>
         <h2 className="section-title">Was andere über die Werke sagen</h2>
-
-        <div className="award-box">
-          <div className="award-icon"><MedalIcon size={28} /></div>
-          <div>
-            <h3>Longlist · Young Story Teller Award 2025</h3>
-            <p>Geteilter Himmel, ausgewählt von einer renommierten Fachjury</p>
-          </div>
-        </div>
 
         <AwardCertificate />
 
