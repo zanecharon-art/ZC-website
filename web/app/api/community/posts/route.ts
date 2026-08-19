@@ -34,3 +34,46 @@ export async function POST(request: Request) {
   if (error) return NextResponse.json({ error: "insert_failed" }, { status: 500 });
   return NextResponse.json({ id: data.id });
 }
+
+// Edit own post. RLS + author_id scope ensure only the author.
+export async function PATCH(request: Request) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const { postId, body } = await request.json().catch(() => ({}));
+  const b = typeof body === "string" ? body.trim() : "";
+  if (!postId || !b) return NextResponse.json({ error: "missing_fields" }, { status: 400 });
+  if (b.length > LIMITS.body) return NextResponse.json({ error: "too_long" }, { status: 400 });
+  if (violatesPolicy(b)) return NextResponse.json({ error: "policy_violation" }, { status: 422 });
+
+  const { error } = await supabase
+    .from("posts")
+    .update({ body: b })
+    .eq("id", postId)
+    .eq("author_id", user.id);
+  if (error) return NextResponse.json({ error: "update_failed" }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}
+
+// Delete own post (soft: status = 'removed', hidden by RLS).
+export async function DELETE(request: Request) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+
+  const { postId } = await request.json().catch(() => ({}));
+  if (!postId) return NextResponse.json({ error: "missing_fields" }, { status: 400 });
+
+  const { error } = await supabase
+    .from("posts")
+    .update({ status: "removed" })
+    .eq("id", postId)
+    .eq("author_id", user.id);
+  if (error) return NextResponse.json({ error: "delete_failed" }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}
