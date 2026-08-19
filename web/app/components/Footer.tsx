@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { showToast } from "@/lib/toast";
-import { InstagramIcon, XIcon, EnvelopeIcon } from "@/app/components/icons";
+import { InstagramIcon, YouTubeIcon, EnvelopeIcon } from "@/app/components/icons";
 
 export default function Footer() {
   return (
@@ -25,10 +25,10 @@ export default function Footer() {
               style={{ cursor: "pointer", opacity: 0.7, transition: "opacity .2s", display: "inline-flex" }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-              onClick={() => showToast("X (Twitter) folgen")}
-              aria-label="X (Twitter)"
+              onClick={() => showToast("YouTube-Kanal folgen")}
+              aria-label="YouTube"
             >
-              <XIcon size={17} />
+              <YouTubeIcon size={22} />
             </span>
             <span
               style={{ cursor: "pointer", opacity: 0.7, transition: "opacity .2s", display: "inline-flex" }}
