@@ -320,6 +320,11 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 .lp-scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,var(--gold));animation:scrollPulse 2s ease-in-out infinite}
 .lp-scroll span{font-size:10px;letter-spacing:2px;color:var(--txt4);text-transform:uppercase;writing-mode:vertical-rl}
 @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+@keyframes certReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.award-box.is-toggle{cursor:pointer;transition:border-color var(--tr),background var(--tr)}
+.award-box.is-toggle:hover{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,168,83,.16),rgba(212,168,83,.05))}
+.award-chevron{margin-left:auto;flex-shrink:0;color:var(--gold);transition:transform .3s ease}
+.award-chevron.open{transform:rotate(180deg)}
 @media(max-width:768px){
   .lp-name-top,.lp-name-bottom{font-size:clamp(52px,17vw,96px)}
   .lp-photo-area{right:0;width:100%;opacity:.24}
