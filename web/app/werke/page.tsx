@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MedalIcon } from "@/app/components/icons";
 
 export const metadata = {
   title: "Werke — Zane Charon",
@@ -16,7 +17,7 @@ export default function Werke() {
           <Link href="/werke/geteilter-himmel" className="card" style={{ cursor: "pointer", display: "block" }}>
             <div className="book-thumb book-thumb-gh" role="img" aria-label="Cover: Geteilter Himmel"></div>
             <div className="badge" style={{ marginBottom: 6, fontSize: 10, padding: "3px 9px" }}>
-              🏆 Longlist YST Award 2025
+              <MedalIcon size={13} stroke="currentColor" />Longlist YST Award 2025
             </div>
             <div className="book-title">Geteilter Himmel</div>
             <div className="book-meta" style={{ marginBottom: 6 }}>

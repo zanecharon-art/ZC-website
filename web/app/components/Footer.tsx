@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { showToast } from "@/lib/toast";
+import { InstagramIcon, XIcon, EnvelopeIcon } from "@/app/components/icons";
 
 export default function Footer() {
   return (
@@ -10,24 +11,33 @@ export default function Footer() {
         <div className="footer-brand">
           <span className="nav-logo">Zane Charon</span>
           <p>Literarische Fiktion — Geschichten über Licht im Schatten.</p>
-          <div style={{ marginTop: 14, display: "flex", gap: 12 }}>
+          <div style={{ marginTop: 14, display: "flex", gap: 14, alignItems: "center", color: "var(--txt2)" }}>
             <span
-              style={{ cursor: "pointer", opacity: 0.6, transition: "opacity .2s" }}
+              style={{ cursor: "pointer", opacity: 0.7, transition: "opacity .2s", display: "inline-flex" }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
               onClick={() => showToast("Instagram folgen")}
+              aria-label="Instagram"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" strokeWidth="1.8" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="white" strokeWidth="1.8" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <InstagramIcon size={20} />
             </span>
-            <span style={{ fontSize: 18, cursor: "pointer" }} onClick={() => showToast("Twitter/X folgen")}>
-              🐦
+            <span
+              style={{ cursor: "pointer", opacity: 0.7, transition: "opacity .2s", display: "inline-flex" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
+              onClick={() => showToast("X (Twitter) folgen")}
+              aria-label="X (Twitter)"
+            >
+              <XIcon size={17} />
             </span>
-            <span style={{ fontSize: 18, cursor: "pointer" }} onClick={() => showToast("Newsletter abonnieren")}>
-              📬
+            <span
+              style={{ cursor: "pointer", opacity: 0.7, transition: "opacity .2s", display: "inline-flex" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
+              onClick={() => showToast("Newsletter abonnieren")}
+              aria-label="Newsletter"
+            >
+              <EnvelopeIcon size={19} />
             </span>
           </div>
         </div>

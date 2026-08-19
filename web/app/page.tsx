@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { showToast } from "@/lib/toast";
+import { MedalIcon, CraneIcon, AppleMusicIcon, InstagramIcon } from "@/app/components/icons";
 
 function MiniPlayer() {
   const [playing, setPlaying] = useState(false);
@@ -144,7 +145,7 @@ export default function Home() {
         </div>
 
         <div className="lp-award">
-          <span>🏆</span>
+          <MedalIcon size={15} stroke="currentColor" />
           <span>Longlist · Young Story Teller Award 2025</span>
         </div>
 
@@ -163,7 +164,7 @@ export default function Home() {
             <div className="book-thumb book-thumb-gh" role="img" aria-label="Cover: Geteilter Himmel"></div>
             <div>
               <div className="badge" style={{ marginBottom: 8, fontSize: 10, padding: "3px 9px" }}>
-                🏆 Longlist Young Story Teller Award 2025
+                <MedalIcon size={13} stroke="currentColor" />Longlist Young Story Teller Award 2025
               </div>
               <div className="book-title">Geteilter Himmel</div>
               <div className="book-meta">Roman · 14 Kapitel</div>
@@ -219,7 +220,7 @@ export default function Home() {
               flexShrink: 0,
             }}
           >
-            🕊️
+            <CraneIcon size={28} stroke="var(--gold-lt)" />
           </div>
           <div>
             <span className="section-label" style={{ marginBottom: 4 }}>
@@ -240,7 +241,7 @@ export default function Home() {
       <div className="section">
         <span className="section-label">Pressestimmen</span>
         <div className="award-box">
-          <div className="award-icon">🏆</div>
+          <div className="award-icon"><MedalIcon size={28} /></div>
           <div>
             <h3>Longlist · Young Story Teller Award 2025</h3>
             <p>Geteilter Himmel, ausgewählt von einer renommierten Fachjury</p>
@@ -317,15 +318,7 @@ export default function Home() {
                 Spotify
               </button>
               <button className="platform-btn apple" onClick={() => showToast("Öffnet Apple Music")}>
-                <svg width="15" height="15" viewBox="0 0 24 24">
-                  <defs>
-                    <linearGradient id="am-grad" x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#FA233B" />
-                      <stop offset="1" stopColor="#FB5C74" />
-                    </linearGradient>
-                  </defs>
-                  <path fill="url(#am-grad)" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
-                </svg>
+                <AppleMusicIcon size={15} />
                 Apple Music
               </button>
               <button className="platform-btn youtube" onClick={() => showToast("Öffnet YouTube")}>
@@ -339,20 +332,7 @@ export default function Home() {
                 YouTube
               </button>
               <button className="platform-btn instagram" onClick={() => showToast("Öffnet Instagram")}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                  <defs>
-                    <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#FEDA75" />
-                      <stop offset="0.25" stopColor="#FA7E1E" />
-                      <stop offset="0.5" stopColor="#D62976" />
-                      <stop offset="0.75" stopColor="#962FBF" />
-                      <stop offset="1" stopColor="#4F5BD5" />
-                    </linearGradient>
-                  </defs>
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad)" strokeWidth="2" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad)" strokeWidth="2" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad)" strokeWidth="2" strokeLinecap="round" />
-                </svg>
+                <InstagramIcon size={15} />
                 Instagram
               </button>
             </div>

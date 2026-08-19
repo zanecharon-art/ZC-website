@@ -1,3 +1,5 @@
+import { MedalIcon } from "@/app/components/icons";
+
 export const metadata = {
   title: "Presse — Zane Charon",
 };
@@ -10,7 +12,7 @@ export default function Presse() {
         <h2 className="section-title">Was andere über die Werke sagen</h2>
 
         <div className="award-box">
-          <div className="award-icon">🏆</div>
+          <div className="award-icon"><MedalIcon size={28} /></div>
           <div>
             <h3>Longlist · Young Story Teller Award 2025</h3>
             <p>Geteilter Himmel, ausgewählt von einer renommierten Fachjury</p>
