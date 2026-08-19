@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { showToast } from "@/lib/toast";
@@ -11,6 +11,7 @@ type Thread = {
   id: string;
   title: string;
   body: string;
+  author_id: string;
   author_name: string;
   created_at: string;
   status: string;
@@ -18,6 +19,7 @@ type Thread = {
 type Post = {
   id: string;
   body: string;
+  author_id: string;
   author_name: string;
   created_at: string;
 };
@@ -40,7 +42,7 @@ async function fetchThread(id: string): Promise<ThreadData> {
     supabase.from("threads").select("*").eq("id", id).maybeSingle(),
     supabase
       .from("posts")
-      .select("id, body, author_name, created_at")
+      .select("id, body, author_id, author_name, created_at")
       .eq("thread_id", id)
       .order("created_at", { ascending: true }),
   ]);
@@ -53,6 +55,7 @@ async function fetchThread(id: string): Promise<ThreadData> {
 
 export default function ThreadPage() {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const id = params.id;
   const configured = isSupabaseConfigured();
   const [user, setUser] = useState<User | null>(null);
@@ -61,6 +64,11 @@ export default function ThreadPage() {
   const [loaded, setLoaded] = useState(!configured);
   const [reply, setReply] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [editingThread, setEditingThread] = useState(false);
+  const [editTitle, setEditTitle] = useState("");
+  const [editBody, setEditBody] = useState("");
+  const [editingPostId, setEditingPostId] = useState<string | null>(null);
+  const [editPostBody, setEditPostBody] = useState("");
 
   useEffect(() => {
     if (!configured) return;
@@ -128,7 +136,77 @@ export default function ThreadPage() {
     else showToast("Aktion fehlgeschlagen.");
   }
 
+  function startEditThread() {
+    if (!thread) return;
+    setEditTitle(thread.title);
+    setEditBody(thread.body);
+    setEditingThread(true);
+  }
+
+  async function saveThreadEdit() {
+    const res = await fetch("/api/community/threads", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ threadId: id, title: editTitle, body: editBody }),
+    });
+    if (res.ok) {
+      setEditingThread(false);
+      refresh();
+      showToast("Änderungen gespeichert.");
+      return;
+    }
+    if (res.status === 422) return showToast("Dein Beitrag verstößt gegen die Community-Regeln.");
+    showToast("Speichern fehlgeschlagen.");
+  }
+
+  async function deleteThread() {
+    if (!window.confirm("Dieses Thema wirklich löschen? Das kann nicht rückgängig gemacht werden.")) return;
+    const res = await fetch("/api/community/threads", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ threadId: id }),
+    });
+    if (res.ok) {
+      showToast("Thema gelöscht.");
+      router.push("/community");
+      return;
+    }
+    showToast("Löschen fehlgeschlagen.");
+  }
+
+  async function savePostEdit(postId: string) {
+    const res = await fetch("/api/community/posts", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId, body: editPostBody }),
+    });
+    if (res.ok) {
+      setEditingPostId(null);
+      refresh();
+      showToast("Änderungen gespeichert.");
+      return;
+    }
+    if (res.status === 422) return showToast("Dein Beitrag verstößt gegen die Community-Regeln.");
+    showToast("Speichern fehlgeschlagen.");
+  }
+
+  async function deletePost(postId: string) {
+    if (!window.confirm("Diesen Kommentar wirklich löschen?")) return;
+    const res = await fetch("/api/community/posts", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId }),
+    });
+    if (res.ok) {
+      refresh();
+      showToast("Kommentar gelöscht.");
+      return;
+    }
+    showToast("Löschen fehlgeschlagen.");
+  }
+
   const isAdmin = Boolean(ADMIN_EMAIL && user?.email?.toLowerCase() === ADMIN_EMAIL);
+  const ownsThread = Boolean(user && thread && user.id === thread.author_id);
 
   return (
     <div className="page">
@@ -159,54 +237,136 @@ export default function ThreadPage() {
               von {thread.author_name} · {fmtDate(thread.created_at)}
             </div>
 
-            <div className="card" style={{ marginBottom: 8 }}>
-              <p style={{ color: "var(--txt2)", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{thread.body}</p>
-            </div>
-            <div className="post-actions" style={{ marginBottom: 28 }}>
-              {user && (
-                <button className="link-btn" onClick={() => report("thread", thread.id)}>
-                  Melden
-                </button>
-              )}
-              {isAdmin && (
-                <>
-                  <button
-                    className="link-btn"
-                    onClick={() => moderate(thread.status === "locked" ? "unlock" : "lock", thread.id)}
-                  >
-                    {thread.status === "locked" ? "Entsperren" : "Sperren"}
+            {editingThread ? (
+              <div className="card" style={{ marginBottom: 28 }}>
+                <div className="form-group">
+                  <label>Titel</label>
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    maxLength={140}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Dein Beitrag</label>
+                  <textarea
+                    value={editBody}
+                    onChange={(e) => setEditBody(e.target.value)}
+                    maxLength={5000}
+                  />
+                </div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  <button className="btn btn-sm" onClick={saveThreadEdit}>
+                    Speichern
                   </button>
-                  <button className="link-btn danger" onClick={() => moderate("remove_thread", thread.id)}>
-                    Entfernen
+                  <button className="btn-ghost btn-sm" onClick={() => setEditingThread(false)}>
+                    Abbrechen
                   </button>
-                </>
-              )}
-            </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="card" style={{ marginBottom: 8 }}>
+                  <p style={{ color: "var(--txt2)", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{thread.body}</p>
+                </div>
+                <div className="post-actions" style={{ marginBottom: 28 }}>
+                  {user && (
+                    <button className="link-btn" onClick={() => report("thread", thread.id)}>
+                      Melden
+                    </button>
+                  )}
+                  {ownsThread && (
+                    <>
+                      <button className="link-btn" onClick={startEditThread}>
+                        Bearbeiten
+                      </button>
+                      <button className="link-btn danger" onClick={deleteThread}>
+                        Löschen
+                      </button>
+                    </>
+                  )}
+                  {isAdmin && (
+                    <>
+                      <button
+                        className="link-btn"
+                        onClick={() => moderate(thread.status === "locked" ? "unlock" : "lock", thread.id)}
+                      >
+                        {thread.status === "locked" ? "Entsperren" : "Sperren"}
+                      </button>
+                      <button className="link-btn danger" onClick={() => moderate("remove_thread", thread.id)}>
+                        Entfernen
+                      </button>
+                    </>
+                  )}
+                </div>
+              </>
+            )}
 
             <h3 style={{ fontSize: 16, marginBottom: 14 }}>
               {posts.length} {posts.length === 1 ? "Antwort" : "Antworten"}
             </h3>
 
-            {posts.map((post) => (
-              <div className="post-item" key={post.id}>
-                <div className="topic-meta" style={{ marginBottom: 6 }}>
-                  {post.author_name} · {fmtDate(post.created_at)}
-                </div>
-                <p style={{ color: "var(--txt2)", lineHeight: 1.75, whiteSpace: "pre-wrap" }}>{post.body}</p>
-                <div className="post-actions">
-                  {user && (
-                    <button className="link-btn" onClick={() => report("post", post.id)}>
-                      Melden
-                    </button>
+            {posts.map((post) => {
+              const ownsPost = Boolean(user && user.id === post.author_id);
+              const editing = editingPostId === post.id;
+              return (
+                <div className="post-item" key={post.id}>
+                  <div className="topic-meta" style={{ marginBottom: 6 }}>
+                    {post.author_name} · {fmtDate(post.created_at)}
+                  </div>
+                  {editing ? (
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <textarea
+                        value={editPostBody}
+                        onChange={(e) => setEditPostBody(e.target.value)}
+                        maxLength={5000}
+                      />
+                      <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
+                        <button className="btn btn-sm" onClick={() => savePostEdit(post.id)}>
+                          Speichern
+                        </button>
+                        <button className="btn-ghost btn-sm" onClick={() => setEditingPostId(null)}>
+                          Abbrechen
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <p style={{ color: "var(--txt2)", lineHeight: 1.75, whiteSpace: "pre-wrap" }}>{post.body}</p>
+                      <div className="post-actions">
+                        {user && (
+                          <button className="link-btn" onClick={() => report("post", post.id)}>
+                            Melden
+                          </button>
+                        )}
+                        {ownsPost && (
+                          <>
+                            <button
+                              className="link-btn"
+                              onClick={() => {
+                                setEditingPostId(post.id);
+                                setEditPostBody(post.body);
+                              }}
+                            >
+                              Bearbeiten
+                            </button>
+                            <button className="link-btn danger" onClick={() => deletePost(post.id)}>
+                              Löschen
+                            </button>
+                          </>
+                        )}
+                        {isAdmin && (
+                          <button className="link-btn danger" onClick={() => moderate("remove_post", post.id)}>
+                            Entfernen
+                          </button>
+                        )}
+                      </div>
+                    </>
                   )}
-                  {isAdmin && (
-                    <button className="link-btn danger" onClick={() => moderate("remove_post", post.id)}>
-                      Entfernen
-                    </button>
-                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {!user ? (
               <p style={{ color: "var(--txt3)", marginTop: 24, fontSize: 14 }}>
