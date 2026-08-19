@@ -45,7 +45,7 @@ export default function ScrollSnake() {
           strokeLinecap="round"
           fill="none"
         />
-        <ellipse cx="13" cy="64.5" rx="4.6" ry="4.1" fill="var(--gold)" />
+        <ellipse cx="13" cy="64.5" rx="4.6" ry="4.1" fill="var(--pink)" />
         <circle cx="11.1" cy="64.4" r="0.8" fill="var(--bg)" />
         <circle cx="14.9" cy="64.4" r="0.8" fill="var(--bg)" />
         <path
