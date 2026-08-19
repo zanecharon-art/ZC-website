@@ -80,6 +80,15 @@ export function InstagramIcon({ size = 15, className, style }: IconProps) {
   );
 }
 
+export function YouTubeIcon({ size = 22, className, style }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" className={className} style={style}>
+      <path fill="#FF0000" d="M23.498 6.186a2.97 2.97 0 0 0-2.088-2.088C19.692 3.5 12 3.5 12 3.5s-7.692 0-9.41.598A2.97 2.97 0 0 0 .502 6.186 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .502 5.814 2.97 2.97 0 0 0 2.088 2.088C4.308 20.5 12 20.5 12 20.5s7.692 0 9.41-.598a2.97 2.97 0 0 0 2.088-2.088A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.502-5.814z" />
+      <path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
 /* X (Twitter) — inherits color via currentColor */
 export function XIcon({ size = 18, className, style }: IconProps) {
   return (
