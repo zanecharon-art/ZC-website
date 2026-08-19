@@ -66,7 +66,12 @@ export async function DELETE(request: Request) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  const { threadId } = await request.json().catch(() => ({}));
+  // Read the id from the query string (robust across environments); fall back to body.
+  let threadId = new URL(request.url).searchParams.get("threadId") || "";
+  if (!threadId) {
+    const body = await request.json().catch(() => ({}));
+    threadId = typeof body?.threadId === "string" ? body.threadId : "";
+  }
   if (!threadId) return NextResponse.json({ error: "missing_fields" }, { status: 400 });
 
   const { error } = await supabase
@@ -74,6 +79,6 @@ export async function DELETE(request: Request) {
     .update({ status: "removed" })
     .eq("id", threadId)
     .eq("author_id", user.id);
-  if (error) return NextResponse.json({ error: "delete_failed" }, { status: 500 });
+  if (error) return NextResponse.json({ error: "delete_failed", detail: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
