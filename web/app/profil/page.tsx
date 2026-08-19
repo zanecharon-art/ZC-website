@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ProfileTabs from "./ProfileTabs";
+import { CraneIcon } from "@/app/components/icons";
 
 export const metadata = {
   title: "Profil — Zane Charon",
@@ -29,7 +30,7 @@ export default async function Profil() {
     <div className="page">
       <div className="section">
         <div className="profile-header">
-          <div className="profile-avatar">🕊️</div>
+          <div className="profile-avatar"><CraneIcon size={38} stroke="var(--gold-lt)" /></div>
           <div>
             <div className="profile-name">{username}</div>
             <div className="profile-status">{status}</div>

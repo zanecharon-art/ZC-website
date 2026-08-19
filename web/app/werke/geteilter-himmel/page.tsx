@@ -2,12 +2,13 @@
 
 import { showToast } from "@/lib/toast";
 import { startCheckout } from "@/lib/checkout";
+import { MedalIcon } from "@/app/components/icons";
 
 export default function GeteilterHimmel() {
   return (
     <div className="page">
       <div className="section">
-        <div className="badge">🏆 Longlist · Young Story Teller Award 2025</div>
+        <div className="badge"><MedalIcon size={14} stroke="currentColor" />Longlist · Young Story Teller Award 2025</div>
 
         <div
           style={{
