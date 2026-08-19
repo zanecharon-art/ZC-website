@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { showToast } from "@/lib/toast";
 import { MedalIcon, CraneIcon, AppleMusicIcon, InstagramIcon } from "@/app/components/icons";
+import ScrollSnake from "@/app/components/ScrollSnake";
 
 function MiniPlayer() {
   const [playing, setPlaying] = useState(false);
@@ -149,11 +150,9 @@ export default function Home() {
           <span>Longlist · Young Story Teller Award 2025</span>
         </div>
 
-        <div className="lp-scroll">
-          <div className="lp-scroll-line"></div>
-          <span>Scroll</span>
-        </div>
       </section>
+
+      <ScrollSnake />
 
       <hr className="divider" />
 
