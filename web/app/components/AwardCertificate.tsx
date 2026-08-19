@@ -22,37 +22,28 @@ export default function AwardCertificate() {
   };
 
   return (
-    <div style={{ marginTop: 18 }}>
-      <figure style={{ margin: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label="Urkunde vergrößern"
-          style={{
-            padding: 0,
-            border: "1px solid var(--gold-brd)",
-            borderRadius: 12,
-            overflow: "hidden",
-            background: "var(--bg-card)",
-            boxShadow: "var(--shadow)",
-            cursor: "zoom-in",
-            maxWidth: 300,
-            lineHeight: 0,
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/auszeichnungen/ysa-2025-longlist.jpg"
-            alt="Urkunde: Longlist des Young Storyteller Award 2025 (story.one & Thalia)"
-            width={300}
-            style={{ display: "block", width: "100%", height: "auto", ...noSelect }}
-            {...guard}
-          />
-        </button>
-        <figcaption style={{ fontSize: 12, color: "var(--txt3)", marginTop: 10, textAlign: "center" }}>
-          Longlist · Young Storyteller Award 2025 — story.one &amp; Thalia
-        </figcaption>
-      </figure>
+    <div style={{ marginTop: 12 }}>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 7,
+          background: "none",
+          border: "none",
+          padding: "4px 0",
+          font: "inherit",
+          fontSize: 13,
+          color: "var(--gold)",
+          cursor: "pointer",
+          textDecoration: "underline",
+          textUnderlineOffset: 3,
+        }}
+      >
+        <span aria-hidden="true">🔍</span>
+        Urkunde der Longlist-Nominierung ansehen
+      </button>
 
       {open && (
         <div
