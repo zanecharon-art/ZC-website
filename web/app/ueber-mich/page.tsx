@@ -45,7 +45,7 @@ export default function UeberMich() {
           </div>
           <div className="stat-card">
             <span className="stat-icon" aria-hidden="true">
-              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="35" height="35" viewBox="0 0 32 32" fill="none" stroke="var(--gold)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 8.5 12.5 15 17 5 21.5 16 30 11 18.5 18 16 27 11.5 15.8Z" />
                 <path d="M12.5 15 16 20" opacity="0.5" />
               </svg>
