@@ -22,17 +22,34 @@ export default function UeberMich() {
 
         <div className="stats-grid">
           <div className="stat-card">
-            <span className="stat-icon">✒️</span>
+            <span className="stat-icon" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8.5C13.5 6.8 10.4 6.2 6.5 6.5 5.7 6.56 5 7.24 5 8.05V22.9c0 .86.78 1.5 1.6 1.42C10.3 24 13.6 24.6 16 26.2" />
+                <path d="M16 8.5c2.5-1.7 5.6-2.3 9.5-2 .8.06 1.5.74 1.5 1.55V22.9c0 .86-.78 1.5-1.6 1.42C21.7 24 18.4 24.6 16 26.2" />
+                <path d="M16 8.5V26.2" />
+              </svg>
+            </span>
             <span className="stat-value">1</span>
             <span className="stat-label">Veröffentlichter Roman</span>
           </div>
           <div className="stat-card">
-            <span className="stat-icon">🏆</span>
+            <span className="stat-icon" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="16" cy="12" r="7.5" />
+                <path d="M16 8.3l1.35 2.9 3.15.35-2.35 2.15.65 3.1L16 17.2l-2.8 1.6.65-3.1-2.35-2.15 3.15-.35z" />
+                <path d="M13 18.8 11 28l5-3 5 3-2-9.2" />
+              </svg>
+            </span>
             <span className="stat-value" style={{ fontSize: 15 }}>Longlist 2025</span>
             <span className="stat-label">Young Story Teller Award</span>
           </div>
           <div className="stat-card">
-            <span className="stat-icon">🕊️</span>
+            <span className="stat-icon" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 8.5 12.5 15 17 5 21.5 16 30 11 18.5 18 16 27 11.5 15.8Z" />
+                <path d="M12.5 15 16 20" opacity="0.5" />
+              </svg>
+            </span>
             <span className="stat-value" style={{ fontSize: 15 }}>Seit 2023</span>
             <span className="stat-label">Auf der Suche nach Worten</span>
           </div>
