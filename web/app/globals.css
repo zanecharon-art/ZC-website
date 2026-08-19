@@ -321,6 +321,12 @@ footer{background:var(--bg-mid);border-top:1px solid var(--brd);padding:40px}
 .lp-scroll span{font-size:10px;letter-spacing:2px;color:var(--txt4);text-transform:uppercase;writing-mode:vertical-rl}
 @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
 @keyframes certReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.scroll-snake{position:fixed;right:26px;z-index:20;pointer-events:none;transition:top .12s linear,opacity .3s ease;filter:drop-shadow(0 2px 4px rgba(90,70,40,.18))}
+.scroll-snake svg{animation:snakeSlither 2.6s ease-in-out infinite;transform-origin:center}
+.scroll-snake-tongue{animation:snakeFlick 1.8s ease-in-out infinite}
+@keyframes snakeSlither{0%,100%{transform:translateX(0) rotate(0deg)}50%{transform:translateX(3px) rotate(1.5deg)}}
+@keyframes snakeFlick{0%,80%,100%{opacity:0}85%,96%{opacity:1}}
+@media(max-width:768px){.scroll-snake{right:12px}}
 .award-box.is-toggle{cursor:pointer;transition:border-color var(--tr),background var(--tr)}
 .award-box.is-toggle:hover{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,168,83,.16),rgba(212,168,83,.05))}
 .award-chevron{margin-left:auto;flex-shrink:0;color:var(--gold);transition:transform .3s ease}
